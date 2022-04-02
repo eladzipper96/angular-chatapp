@@ -1,0 +1,91 @@
+@import "../../../../assets/scss/variables.scss";
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem;
+  gap: 2rem;
+  overflow-y: auto;
+  transform: translateX(2rem);
+  padding-right: 4rem !important; //override
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  border-width: 1px;
+  border-color: $primary-color;
+
+  &-header {
+    display: flex;
+    flex-direction: column;
+    background-color: $primary-color;
+    color: white;
+    padding: 1rem 1rem;
+    font-size: 1.6rem;
+  }
+
+  &-description {
+    color: $light-gray;
+    font-size: 1.3rem;
+  }
+
+  &-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 1rem;
+    padding: 1rem 2rem;
+
+    &-input {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 1.4rem;
+      color: $bold-gray;
+
+      & input {
+        font-size: 1.6rem;
+        padding: 0.5rem 0.5rem;
+        outline: none;
+        border-color: $bold-gray;
+        border-style: solid;
+        border-width: 1px;
+      }
+    }
+
+    &-feedback {
+      align-self: center;
+      font-size: 1.6rem;
+      color: red;
+      text-transform: capitalize;
+    }
+
+    &-buttons {
+      display: flex;
+      gap: 2rem;
+      justify-self: end;
+      font-size: 1.6rem;
+      align-items: center;
+
+      & div {
+        cursor: pointer;
+      }
+    }
+
+    &-submit {
+      background-color: $primary-color;
+      padding: 0.5rem 1rem;
+      color: white;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-style: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<div class="container">
+    <app-action-bar (searchEvent)="updateContactList($event)"></app-action-bar>
+    <div class="list">
+        <app-list-item
+        *ngFor="let contact of contactList"
+        [image]="contact.profile_picture"
+        [name]="contact.name+' '+contact.last_name"
+        [content]="contact.moto"
+        [time]=" "
+        (click)="selectContactHandler(contact)"
+        ></app-list-item>
+    </div>
+</div>

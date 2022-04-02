@@ -1,0 +1,13 @@
+<div class="container">
+    <app-action-bar (searchEvent)="updateChatList($event)"></app-action-bar>
+    <div class="list">
+        <app-list-item 
+        *ngFor="let chat of chatList"
+        [image]="chat.profile_picture"
+        [name]="chat.name"
+        [content]="chat.content[chat.content.length-1].value"
+        [time]="chat.content[chat.content.length-1].time"
+        (click)="onClickHandler(chat)"
+        ></app-list-item>
+    </div>
+</div>

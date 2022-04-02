@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="search">
+        <input [ngModel]='searchValue' (ngModelChange)='emitSearchValue($event)'/>
+        <img [src]="search_icon" alt="'search'"/>
+    </div>
+    <div class="icons">
+        <img [src]="addfriend_icon" [alt]="'add_friend'"/>
+        <img [src]="notifcations_icon" [alt]="'notifcation'"/>
+        <img [src]="options_icon" [alt]="'options'"/>
+    </div>
+</div>

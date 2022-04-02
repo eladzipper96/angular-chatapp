@@ -1,0 +1,114 @@
+<div class="container">
+
+    <!-- Account Form -->
+    <div class="form-container">
+        <div class="form-container-header">
+            <span>Account</span>
+            <span class="form-container-description">Update personal information</span>
+        </div>
+        <form class="form-container-form" [formGroup]="accountForm" (ngSubmit)="accountFormSubmitHandler()">
+            <div class="form-container-form-input">
+                <label>First Name</label>
+                <input formControlName='name'/>
+            </div>
+            <div class="form-container-form-input">
+                <label>Last Name</label>
+                <input placeholder="" formControlName='last_name'/>
+            </div>
+            <div class="form-container-form-input">
+                <label>Phone Number</label>
+                <input placeholder="" formControlName='phone' type='number'/>
+            </div>
+            <div class="form-container-form-input">
+                <label>Birthdate</label>
+                <input type="date" formControlName='birthdate'/>
+            </div>
+            <div class="form-container-form-input">
+                <label>Email Address</label>
+                <input placeholder="" formControlName='email'/>
+            </div>
+            <div class="form-container-form-input">
+                <label>Website</label>
+                <input placeholder="" formControlName='website'/>
+            </div>
+            <div class="form-container-form-input">
+                <label>Address</label>
+                <input placeholder="" formControlName='address'/>
+            </div>
+            <div class="form-container-form-input">
+                <label>Moto</label>
+                <input placeholder="" formControlName='moto'/>
+            </div>
+            <div class="form-container-form-input">
+                <label>Profile Picture (URL)</label>
+                <input placeholder="" formControlName='profile_picture'/>
+            </div>
+            <div></div> <!--This Div is for Grid purposes-->
+            <span class="form-container-form-feedback">{{AccountFormFeedBack}}</span>
+            <div class="form-container-form-buttons">
+                <div>Reset</div>
+                <button class="form-container-form-submit" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Social Form -->
+    <div class="form-container">
+        <div class="form-container-header">
+            <span>Social</span>
+            <span class="form-container-description">Update personal & contact information</span>
+        </div>
+        <form class="form-container-form" [formGroup]="socialForm" (ngSubmit)="socialFormSubmitHandler()">
+            <div class="form-container-form-input">
+                <label>Facebook</label>
+                <input placeholder="" formControlName='facebook'/>
+            </div>
+            <div class="form-container-form-input">
+                <label>Twitter</label>
+                <input placeholder="" formControlName='twitter'/>
+            </div>
+            <div class="form-container-form-input">
+                <label>Instagram</label>
+                <input placeholder="" formControlName='instagram'/>
+            </div>
+            <div class="form-container-form-input">
+                <label>Linkedin</label>
+                <input placeholder="" formControlName='linkedin'/>
+            </div>
+            <span class="form-container-form-feedback">{{SocialFormFeedBack}}</span>
+            <div class="form-container-form-buttons">
+                <div>Reset</div>
+                <button class="form-container-form-submit" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Password Form -->
+    <div class="form-container">
+        <div class="form-container-header">
+            <span>Password</span>
+            <span class="form-container-description">Update personal & contact information</span>
+        </div>
+        <form class="form-container-form" [formGroup]="passwordForm" (ngSubmit)="passwordFormSubmitHandler()">
+            <div class="form-container-form-input">
+                <label>Current Password</label>
+                <input placeholder="" formControlName='current' type='password'/>
+            </div>
+            <div></div>
+            <div class="form-container-form-input">
+                <label>New Password</label>
+                <input placeholder="" formControlName='new' type='password'/>
+            </div>
+            <div class="form-container-form-input">
+                <label>Confirm Password</label>
+                <input placeholder="" formControlName='confirm' type='password'/>
+            </div>
+            <span class="form-container-form-feedback">{{PasswordFormFeedBack}}</span>
+            <div class="form-container-form-buttons">
+                <div>Reset</div>
+                <button class="form-container-form-submit" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+</div>

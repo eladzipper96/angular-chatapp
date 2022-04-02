@@ -1,0 +1,12 @@
+<div class="container" *ngIf="userId === authorId; else contantmsg">
+    <img class="image image-right" [src]="image"/>
+    <div class="content content-left">{{content}}</div>
+    <div class="under-content">{{name}} {{time}}</div>
+</div>
+<ng-template #contantmsg>
+    <div class="container">
+        <img class="image image-left" [src]="image"/>
+        <div class="content content-right">{{content}}</div>
+        <div class="under-content">{{name}} {{time}}</div>
+    </div>
+</ng-template>

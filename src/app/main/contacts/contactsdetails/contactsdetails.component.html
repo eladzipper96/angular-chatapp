@@ -1,0 +1,30 @@
+<div class="container" *ngIf="showContact; else noselectedcontact">
+    <div class="top">
+        <img [src]='image' alt="'profile'"/>
+        <span class="top-name">{{name}}</span>
+    </div>
+    <div class="details">
+        
+        <div class="details-group">
+            <app-detailscard [icon]="calander_icon" [title]="'Birth Date'" [data]="birthdate"></app-detailscard>
+            <app-detailscard [icon]="phone_icon" [title]="'Phone Number'" [data]="phone"></app-detailscard>
+            <app-detailscard [icon]="email_icon" [title]="'Email'" [data]="email"></app-detailscard>
+            <app-detailscard [icon]="house_icon" [title]="'Address'" [data]="address"></app-detailscard>
+            <app-detailscard [icon]="web_icon" [title]="'Website'" [data]="website"></app-detailscard>
+        </div>
+
+        <div class="details-group">
+            <app-detailscard [icon]="fb_icon" [title]="'Facebook'" [data]="facebook"></app-detailscard>
+            <app-detailscard [icon]="twitter_icon" [title]="'Twitter'" [data]="twitter"></app-detailscard>
+            <app-detailscard [icon]="instagram_icon" [title]="'Instagram'" [data]="instagram"></app-detailscard>
+            <app-detailscard [icon]="linkedin_icon" [title]="'Linkedin'" [data]="linkedin"></app-detailscard>
+        </div>
+
+    </div>
+</div>
+<ng-template #noselectedcontact>
+    <div class="ph-container">
+        <span>Please Select Contact </span>
+        <img class="ph-image" [src]='people_searching' alt="'People Searching Image'"/>
+    </div>
+</ng-template>

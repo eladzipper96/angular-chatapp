@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="logo">
+        <img [src]="logo" [alt]="'Logo'"/>
+    </div>
+    <div class="forms">
+        <div class="forms-item">
+            <div class="forms-title">Login</div>
+            <form class="forms-form" [formGroup]="loginForm" (ngSubmit)="LoginSubmitHandler()">
+                <div class="forms-form-input">
+                    <label>Username</label>
+                    <input formControlName='username' />
+                </div>
+                <div class="forms-form-input">
+                    <label>Password</label>
+                    <input formControlName='password' type='password' />
+                </div>
+                <button class="forms-form-submit" type="submit">Login</button>
+            </form>
+            <div class="spinner" *ngIf="showSpinner"><app-spinner></app-spinner></div>
+        </div>
+        <div class="forms-item">
+            <div class="forms-title">Register</div>
+            <form class="forms-form" [formGroup]="registerForm">
+                <div class="forms-form-input">
+                    <label>Username</label>
+                    <input formControlName='username'>
+                </div>
+                <div class="forms-form-input">
+                    <label>Password</label>
+                    <input formControlName='password' type='password' />
+                </div>
+                <div class="forms-form-input">
+                    <label>Email</label>
+                    <input formControlName='email' type='email' />
+                </div>
+                <div class="forms-form-input">
+                    <label>Full Name</label>
+                    <input formControlName='full_name' />
+                </div>
+                <button class="forms-form-submit" type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+</div>

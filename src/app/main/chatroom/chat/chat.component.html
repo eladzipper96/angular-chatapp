@@ -1,0 +1,33 @@
+    <div class="container" *ngIf="chatId; else nochatselected" >
+
+        <div class="chat-top">
+            <div class="chat-top--left">
+                <img [src]="topImage"/>
+                <div class="chat-top--left-content">
+                    <span class="chat-top--left-name">{{name}}</span>
+                    <span class="chat-top--left-lastseen">Last Seen: {{lastSeen}}</span>
+                </div>
+            </div>
+    
+            <div class="chat-top--right">
+                <img [src]="options"/>
+            </div>
+        </div>
+    
+        <div class="chat-content" #chatContent [scrollTop]="chatContent.scrollHeight">
+            <app-chatitem *ngFor="let msg of messagesList" [data]="msg"></app-chatitem>
+        </div>
+        <div class="chat-input">
+            <input [(ngModel)]='message'/>
+            <div class="chat-input-submit" (click)="addMessageHandler(message)">
+                <img [src]="send" alt="'>'"/>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #nochatselected>
+        <div class="ph-container">
+            <span>Please Select someone to talk with</span>
+            <img class="ph-image" [src]='people_talking' alt="'People Talking Image'"/>
+        </div>
+    </ng-template>

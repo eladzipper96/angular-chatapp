@@ -1,0 +1,48 @@
+@import "../../../assets/scss/variables.scss";
+
+.container {
+  height: 100vh;
+  background-color: $primary-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  top: 2rem;
+  background-color: white;
+  display: flex;
+  padding: 1rem 1rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+
+  & img {
+    width: 35px;
+  }
+}
+
+.navigator {
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5rem;
+  width: 100%;
+
+  &-item {
+    cursor: pointer;
+    height: 40px;
+    & img {
+      width: 30px;
+      transition: all 0.2s;
+      &:hover {
+        width: 35px;
+      }
+    }
+  }
+}

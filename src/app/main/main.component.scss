@@ -1,0 +1,15 @@
+.container {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 80px 1fr;
+}
+
+.ph {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 3rem;
+    padding: 2rem 2rem;
+  }
+}

@@ -1,0 +1,79 @@
+@import "../../../../assets/scss/variables.scss";
+
+.container {
+  height: 100vh;
+  width: 100%;
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.top {
+  height: 250px; // temp
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem 2rem;
+  background-color: $primary-color;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  & img {
+    border-radius: 50%;
+    width: 150px;
+    background-color: white;
+    padding: 1rem 1rem;
+  }
+
+  &-name {
+    font-size: 2.3rem;
+    font-weight: 500;
+    color:white;
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  overflow-y: auto;
+
+  &-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-item {
+    display: grid;
+    padding: 0.5rem 1rem;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    font-size: 1.3rem;
+    border-style: solid;
+    border-width: 3px;
+    border-color: $light-gray;
+    align-items: center;
+
+    &-title {
+      grid-row: 1/2;
+      grid-column: 1/2;
+      font-weight: 500;
+      color: $bold-gray;
+    }
+
+    &-data {
+      grid-row: 2/3;
+      grid-column: 1/2;
+    }
+
+    &-icon {
+      grid-row: 1/3;
+      grid-column: 2/3;
+      justify-self: end;
+    }
+  }
+}

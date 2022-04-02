@@ -1,0 +1,42 @@
+@import "./../../../assets/scss/variables.scss";
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 0rem 2rem;
+}
+
+.search {
+  position: relative;
+  background-color: $light-gray;
+  padding: 1rem 1rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  & input {
+    font-size: 2rem;
+    outline: none;
+    border-style: none;
+    background-color: $light-gray;
+  }
+
+  & img {
+    position: absolute;
+    right: 1rem;
+  }
+}
+
+.icons {
+  display: flex;
+  gap: 1rem;
+
+  & img {
+    cursor: pointer;
+    width: 28px;
+  }
+}

@@ -1,0 +1,86 @@
+@import "../../../assets/scss/variables.scss";
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary-color;
+}
+
+.logo {
+  display: flex;
+  background-color: white;
+  border-radius: 50%;
+  padding: 2rem 2rem;
+
+  & img {
+    width: 100px;
+  }
+}
+
+.forms {
+  display: flex;
+  gap: 0.3rem;
+
+  &-item {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem 2rem;
+    background-color: white;
+
+    &:first-child {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+  }
+
+  &-title {
+    font-size: 3rem;
+    color: $primary-color;
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    &-input {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 1.4rem;
+
+      & input {
+        font-size: 1.6rem;
+        padding: 0.5rem 0.5rem;
+        outline: none;
+      }
+    }
+
+    &-submit {
+      background-color: $primary-color;
+      border-style: none;
+      font-size: 1.6rem;
+      color: white;
+      padding: 1rem 0rem;
+      cursor: pointer;
+    }
+  }
+}
+
+.spinner {
+  margin-top: 2rem;
+}

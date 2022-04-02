@@ -1,0 +1,14 @@
+<app-loginloader *ngIf="loginProcess; else websiteContent"></app-loginloader>
+<ng-template #websiteContent>
+    <div class="container">
+        <app-sidebar></app-sidebar>
+        <div>
+            <div class="ph-container" *ngIf="showOnEntrance; else content">
+                Show only on first sight
+            </div>
+            <ng-template #content>
+                <router-outlet></router-outlet>
+            </ng-template>
+        </div>
+    </div>
+</ng-template>
