@@ -33,9 +33,8 @@ export class AuthGuard implements CanActivate {
                 const sessionCookie = this.getCookie('sessionid')
                 if(sessionCookie) {
                     this.authService.setinLoginProcess(true)
-                    this.HttpClient.get(`${environment.API_URL}/cookiecheck`, {
-                        withCredentials: true
-                    }).subscribe(value => {
+                    this.HttpClient.get(`${environment.API_URL}/cookiecheck`, {withCredentials: true})
+                    .subscribe(value => {
                         // Case Session Cookie is Invalid
                         if('result' in value) {
                             return_val = this.rejectHandler()

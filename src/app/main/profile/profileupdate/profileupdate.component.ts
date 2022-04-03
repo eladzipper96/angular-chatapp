@@ -1,28 +1,26 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http'
-import { combineLatest, Observable, Subscription } from 'rxjs';
 import { UserDataService } from 'src/app/userdata.service';
 
+import { userPersonalData } from 'src/interfaces/user.interface';
 import { environment } from 'src/environments/environment';
+import { observableExtractor } from 'src/helper_functions/observables';
 
 @Component({
   selector: 'app-profileupdate',
   templateUrl: './profileupdate.component.html',
   styleUrls: ['./profileupdate.component.scss']
 })
-export class ProfileupdateComponent implements OnInit, OnDestroy {
+export class ProfileupdateComponent implements OnInit {
 
   // Forms Control //
   accountForm!: FormGroup;
   socialForm!: FormGroup;
   passwordForm!: FormGroup;
 
-  // Subscriptions //
-  dataSubscription: Subscription = new Subscription;
-
   // Data //
-  data!: any;
+  data!: userPersonalData;
   AccountFormFeedBack: string = ''
   SocialFormFeedBack: string = ''
   PasswordFormFeedBack: string = '' 
@@ -31,34 +29,25 @@ export class ProfileupdateComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    const observable_list: Observable<any>[] = this.UserDataService.getPersonalData()
-    combineLatest(observable_list).subscribe(data => {
-      let data_object: any = {}
+    const personalData = this.UserDataService.getPersonalData()
 
-      for(let item of data) {
-        data_object[item.key] = item.value
-      }
-
-      this.data = data_object
-    })
-    
     this.accountForm = new FormGroup({
-      'name': new FormControl(this.data.name),
-      'last_name': new FormControl(this.data.last_name),
-      'email': new FormControl(this.data.email),
-      'birthdate': new FormControl(this.data.birthday),
-      'phone': new FormControl(this.data.phone),
-      'website': new FormControl(this.data.website),
-      'address': new FormControl(this.data.address),
-      'moto': new FormControl(this.data.moto),
-      'profile_picture': new FormControl(this.data.profile_picture),
+      'name': new FormControl(observableExtractor(personalData.name)),
+      'last_name': new FormControl(observableExtractor(personalData.last_name)),
+      'email': new FormControl(observableExtractor(personalData.email)),
+      'birthdate': new FormControl(observableExtractor(personalData.birthdate)),
+      'phone': new FormControl(observableExtractor(personalData.phone)),
+      'website': new FormControl(observableExtractor(personalData.website)),
+      'address': new FormControl(observableExtractor(personalData.address)),
+      'moto': new FormControl(observableExtractor(personalData.moto)),
+      'profile_picture': new FormControl(observableExtractor(personalData.profile_picture)),
     })
 
     this.socialForm = new FormGroup({
-      'facebook': new FormControl(this.data.facebook),
-      'twitter': new FormControl(this.data.twitter),
-      'instagram': new FormControl(this.data.instagram),
-      'linkedin': new FormControl(this.data.linkedin),
+      'facebook': new FormControl(observableExtractor(personalData.facebook)),
+      'twitter': new FormControl(observableExtractor(personalData.twitter)),
+      'instagram': new FormControl(observableExtractor(personalData.instagram)),
+      'linkedin': new FormControl(observableExtractor(personalData.linkedin)),
     })
 
     this.passwordForm = new FormGroup({
@@ -67,10 +56,6 @@ export class ProfileupdateComponent implements OnInit, OnDestroy {
       'confirm': new FormControl(null),
     })
 
-  }
-
-  ngOnDestroy(): void {
-    this.dataSubscription.unsubscribe()
   }
 
   accountFormSubmitHandler(): void {

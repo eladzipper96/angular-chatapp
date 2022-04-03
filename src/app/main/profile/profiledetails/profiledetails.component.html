@@ -1,20 +1,20 @@
 <div class="container">
     <div class="top">
-        <img [src]='profileImage'/>
+        <img [src]='userdata.profile_picture | async'/>
         <div>
-            <span>{{data.name}}</span>
-            <span> {{data.last_name}}</span>
+            <span>{{userdata.name | async}}</span>
+            <span> {{userdata.last_name | async}}</span>
         </div>
     </div>
     <div class="details">
-        <app-detailscard [icon]="calander_icon" [title]="'Birth Date'" [data]='data.birthday'></app-detailscard>
-        <app-detailscard [icon]="phone_icon" [title]="'Phone Number'" [data]="data.phone"></app-detailscard>
-        <app-detailscard [icon]="email_icon" [title]="'Email'" [data]="data.email"></app-detailscard>
-        <app-detailscard [icon]="house_icon" [title]="'Address'" [data]="data.address"></app-detailscard>
-        <app-detailscard [icon]="web_icon" [title]="'Website'" [data]="data.website"></app-detailscard>
-        <app-detailscard [icon]="fb_icon" [title]="'Facebook'" [data]="data.facebook"></app-detailscard>
-        <app-detailscard [icon]="twitter_icon" [title]="'Twitter'" [data]="data.twitter"></app-detailscard>
-        <app-detailscard [icon]="instagram_icon" [title]="'Instagram'" [data]="data.instagram"></app-detailscard>
-        <app-detailscard [icon]="linkedin_icon" [title]="'Linkedin'" [data]="data.linkedin"></app-detailscard>
+        <app-detailscard [icon]="calander_icon" [title]="'Birth Date'" [data]='userdata.birthdate | async '></app-detailscard>
+        <app-detailscard [icon]="phone_icon" [title]="'Phone Number'" [data]="userdata.phone | async"></app-detailscard>
+        <app-detailscard [icon]="email_icon" [title]="'Email'" [data]="userdata.email | async"></app-detailscard>
+        <app-detailscard [icon]="house_icon" [title]="'Address'" [data]="userdata.address | async"></app-detailscard>
+        <app-detailscard [icon]="web_icon" [title]="'Website'" [data]="userdata.website | async"></app-detailscard>
+        <app-detailscard [icon]="fb_icon" [title]="'Facebook'" [data]="userdata.website | async"></app-detailscard>
+        <app-detailscard [icon]="twitter_icon" [title]="'Twitter'" [data]="userdata.twitter | async"></app-detailscard>
+        <app-detailscard [icon]="instagram_icon" [title]="'Instagram'" [data]="userdata.instagram | async"></app-detailscard>
+        <app-detailscard [icon]="linkedin_icon" [title]="'Linkedin'" [data]="userdata.linkedin | async"></app-detailscard>
     </div>
 </div>

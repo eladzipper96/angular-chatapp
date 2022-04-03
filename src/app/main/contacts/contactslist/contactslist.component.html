@@ -2,12 +2,18 @@
     <app-action-bar (searchEvent)="updateContactList($event)"></app-action-bar>
     <div class="list">
         <app-list-item
-        *ngFor="let contact of contactList"
+        *ngFor="let contact of contactList; let i = index"
         [image]="contact.profile_picture"
         [name]="contact.name+' '+contact.last_name"
         [content]="contact.moto"
         [time]=" "
-        (click)="selectContactHandler(contact)"
-        ></app-list-item>
+        (click)="selectContactHandler(contact)">
+        <span class="letter" *ngIf="i === 0; else notfirst">{{contact.name[0].toUpperCase()}}</span>
+        <ng-template #notfirst>
+            <span  class="letter" *ngIf="contactList[i].name[0].toUpperCase() !== contactList[i-1].name[0].toUpperCase()">
+                {{contactList[i].name[0].toUpperCase()}}
+            </span>
+        </ng-template>
+        </app-list-item>
     </div>
 </div>

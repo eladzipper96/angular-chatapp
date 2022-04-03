@@ -8,14 +8,14 @@ import { contact } from 'src/interfaces/contact.interface';
 })
 export class ContactsService {
 
-    selectedContact: BehaviorSubject<contact | boolean> = new BehaviorSubject<contact | boolean>(false)
+    selectedContact$: BehaviorSubject<contact | boolean> = new BehaviorSubject<contact | boolean>(false)
 
     getSelectedContact() {
-        return this.selectedContact.asObservable()
+        return this.selectedContact$.asObservable()
     }
 
     setSelectedContact(contact: contact) {
-        this.selectedContact.next(contact)
+        this.selectedContact$.next(contact)
     }
 
 }

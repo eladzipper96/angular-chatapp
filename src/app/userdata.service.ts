@@ -6,10 +6,6 @@ import {contact} from 'src/interfaces/contact.interface';
 import {notifications} from 'src/interfaces/notifications.interface'
 import { user } from 'src/interfaces/user.interface';
 
-export interface keyValuePair {
-    key: string,
-    value: string
-}
 
 @Injectable({
     providedIn: 'root'
@@ -24,24 +20,22 @@ export class UserDataService {
 
     id$: BehaviorSubject<string> = new BehaviorSubject<string>('')
     updatedAt$: BehaviorSubject<string> = new BehaviorSubject<string>('')
-    email$: BehaviorSubject<keyValuePair | string> = new BehaviorSubject<keyValuePair | string>('')
-    birthday$: BehaviorSubject<keyValuePair | string> = new BehaviorSubject<keyValuePair | string>('')
-    name$: BehaviorSubject<keyValuePair | string> = new BehaviorSubject<keyValuePair | string>('')
-    last_name$: BehaviorSubject<keyValuePair | string> = new BehaviorSubject<keyValuePair | string>('')
-    phone$: BehaviorSubject<keyValuePair | string> = new BehaviorSubject<keyValuePair | string>('')
-    profile_picture$: BehaviorSubject<keyValuePair | string> = new BehaviorSubject<keyValuePair | string>('')
-    website$: BehaviorSubject<keyValuePair | string> = new BehaviorSubject<keyValuePair | string>('')
-    moto$: BehaviorSubject<keyValuePair | string> = new BehaviorSubject<keyValuePair | string>('')
-    address$: BehaviorSubject<keyValuePair | string> = new BehaviorSubject<keyValuePair | string>('')
-    facebook$: BehaviorSubject<keyValuePair | string> = new BehaviorSubject<keyValuePair | string>('')
-    instagram$: BehaviorSubject<keyValuePair | string> = new BehaviorSubject<keyValuePair | string>('')
-    linkedin$: BehaviorSubject<keyValuePair | string> = new BehaviorSubject<keyValuePair | string>('')
-    twitter$: BehaviorSubject<keyValuePair | string> = new BehaviorSubject<keyValuePair | string>('')
+    email$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+    birthday$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+    name$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+    last_name$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+    phone$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+    profile_picture$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+    website$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+    moto$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+    address$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+    facebook$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+    instagram$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+    linkedin$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+    twitter$: BehaviorSubject<string> = new BehaviorSubject<string>('')
     
     SetAllUserData(userdata: user[]) {
         const data: user = userdata[0]
-
-        console.log(data)
 
         this.activechats$.next(data.activechats)
         this.chats$.next(data.chats)
@@ -51,57 +45,60 @@ export class UserDataService {
 
         this.id$.next(data._id)
         this.updatedAt$.next(data.updatedAt)
-        this.email$.next({key: 'email', value: data.email})
-        this.birthday$.next({key: 'birthday', value: data.birthday.substring(0,10)})
-        this.name$.next({key: 'name', value: data.name})
-        this.last_name$.next({key: 'last_name', value: data.last_name})
-        this.phone$.next({key: 'phone', value: data.phone})
-        this.profile_picture$.next({key: 'profile_picture', value: data.profile_picture})
-        this.website$.next({key: 'website', value: data.website})
-        this.moto$.next({key: 'moto', value: data.moto})
-        this.address$.next({key: 'address', value: data.address})
-        this.facebook$.next({key: 'facebook', value: data.facebook})
-        this.instagram$.next({key: 'instagram', value: data.instagram})
-        this.linkedin$.next({key: 'linkedin', value: data.linkedin})
-        this.twitter$.next({key: 'twitter', value: data.twitter})
+        this.email$.next(data.email)
+        this.birthday$.next(data.birthday.substring(0,10))
+        this.name$.next(data.name)
+        this.last_name$.next(data.last_name)
+        this.phone$.next(data.phone)
+        this.profile_picture$.next(data.profile_picture)
+        this.website$.next(data.website)
+        this.moto$.next(data.moto)
+        this.address$.next(data.address)
+        this.facebook$.next(data.facebook)
+        this.instagram$.next(data.instagram)
+        this.linkedin$.next(data.linkedin)
+        this.twitter$.next(data.twitter)
     }
 
     getPersonalData() {
-        return [
-            this.name$.asObservable(),
-            this.last_name$.asObservable(),
-            this.email$.asObservable(),
-            this.birthday$.asObservable(),
-            this.phone$.asObservable(),
-            this.profile_picture$.asObservable(),
-            this.website$.asObservable(),
-            this.moto$.asObservable(),
-            this.address$.asObservable(),
-            this.facebook$.asObservable(),
-            this.instagram$.asObservable(),
-            this.linkedin$.asObservable(),
-            this.twitter$.asObservable()
-        ]
+
+        return {
+            name: this.name$.asObservable(),
+            last_name: this.last_name$.asObservable(),
+            email: this.email$.asObservable(),
+            birthdate: this.birthday$.asObservable(),
+            phone: this.phone$.asObservable(),
+            profile_picture: this.profile_picture$.asObservable(),
+            website: this.website$.asObservable(),
+            moto: this.moto$.asObservable(),
+            address: this.address$.asObservable(),
+            facebook: this.facebook$.asObservable(),
+            instagram: this.instagram$.asObservable(),
+            linkedin: this.linkedin$.asObservable(),
+            twitter: this.twitter$.asObservable()
+        }
     }
+
+
 
     setPersonalAccountData(obj: any) {
 
-        this.name$.next({key: 'name', value: obj.name})
-        this.last_name$.next({key: 'last_name', value: obj.last_name})
-        this.email$.next({key: 'email', value: obj.email})
-        this.birthday$.next({key: 'birthday', value: obj.birthday})
-        this.phone$.next({key: 'phone', value: obj.phone})
-        this.profile_picture$.next({key: 'profile_picture', value: obj.profile_picture})
-        this.website$.next({key: 'website', value: obj.website})
-        this.moto$.next({key: 'moto', value: obj.moto})
-        this.address$.next({key: 'address', value: obj.address})
+        this.name$.next(obj.name)
+        this.last_name$.next(obj.last_name)
+        this.email$.next(obj.email)
+        this.birthday$.next(obj.birthday)
+        this.phone$.next(obj.phone)
+        this.profile_picture$.next(obj.profile_picture)
+        this.website$.next(obj.website)
+        this.moto$.next(obj.moto)
+        this.address$.next(obj.address)
     }
 
     setSocialAccountData(obj: any) {
-        this.facebook$.next({key: 'facebook', value: obj.facebook})
-        this.twitter$.next({key: 'twitter', value: obj.twitter})
-        this.instagram$.next({key: 'instagram', value: obj.instagram})
-        this.linkedin$.next({key: 'linkedin', value: obj.linkedin})
+        this.facebook$.next(obj.facebook)
+        this.twitter$.next(obj.twitter)
+        this.instagram$.next(obj.instagram)
+        this.linkedin$.next(obj.linkedin)
     }
 
     getChatList() {
@@ -148,10 +145,18 @@ export class UserDataService {
 
     getUserFullname() {
 
-        const name = this.name$.getValue() as keyValuePair
-        const last_name = this.last_name$.getValue() as keyValuePair
+        const name = this.name$.getValue()
+        const last_name = this.last_name$.getValue()
 
-        return `${name.value} ${last_name.value}`
+        return `${name} ${last_name}`
+    }
+
+    getProfilePicture(): string {
+
+        let image = this.profile_picture$.getValue()
+        if(typeof image !== 'string') return image
+
+        return image
     }
 
 

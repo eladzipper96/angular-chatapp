@@ -10,6 +10,11 @@ import { AuthService } from '../auth.service';
 })
 export class MainComponent implements OnInit, OnDestroy {
 
+  // Images
+  wave_image = '../../assets/images/wave.svg'
+  sun_image = '../../assets/images/sun.png'
+  sand_image = '../../assets/images/sand.png'
+
   // Subscriptions
   loginProcessSubscription: Subscription =  new Subscription
   showOnEntranceSubscription: Subscription =  new Subscription

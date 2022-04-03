@@ -2,7 +2,7 @@
 
         <div class="chat-top">
             <div class="chat-top--left">
-                <img [src]="topImage"/>
+                <img [src]="contactImage"/>
                 <div class="chat-top--left-content">
                     <span class="chat-top--left-name">{{name}}</span>
                     <span class="chat-top--left-lastseen">Last Seen: {{lastSeen}}</span>
@@ -14,8 +14,10 @@
             </div>
         </div>
     
-        <div class="chat-content" #chatContent [scrollTop]="chatContent.scrollHeight">
-            <app-chatitem *ngFor="let msg of messagesList" [data]="msg"></app-chatitem>
+        <div class="chat-content" #chatContent>
+            <app-chatitem *ngFor="let msg of messagesList; let i = index" [data]="msg" [contactImage]="contactImage">
+                <!-- Future Title of Date when a new Date is seen, add to message object representing a full year -->
+            </app-chatitem>
         </div>
         <div class="chat-input">
             <input [(ngModel)]='message'/>

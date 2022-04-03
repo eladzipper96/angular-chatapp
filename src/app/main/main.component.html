@@ -4,7 +4,10 @@
         <app-sidebar></app-sidebar>
         <div>
             <div class="ph-container" *ngIf="showOnEntrance; else content">
-                Show only on first sight
+                <span class="ph-header">Welcome!</span>
+                <img class="ph-sun" [src]='sun_image'/>
+                <img class="ph-sand" [src]='sand_image'/>
+                <img class="ph-wave" [src]='wave_image'/>
             </div>
             <ng-template #content>
                 <router-outlet></router-outlet>

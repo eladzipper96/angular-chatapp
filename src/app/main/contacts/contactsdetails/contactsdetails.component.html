@@ -1,23 +1,23 @@
 <div class="container" *ngIf="showContact; else noselectedcontact">
     <div class="top">
-        <img [src]='image' alt="'profile'"/>
-        <span class="top-name">{{name}}</span>
+        <img [src]='contactData.profile_picture' alt="'profile'"/>
+        <span class="top-name">{{contactData.name+" "+contactData.last_name}}</span>
     </div>
     <div class="details">
         
         <div class="details-group">
-            <app-detailscard [icon]="calander_icon" [title]="'Birth Date'" [data]="birthdate"></app-detailscard>
-            <app-detailscard [icon]="phone_icon" [title]="'Phone Number'" [data]="phone"></app-detailscard>
-            <app-detailscard [icon]="email_icon" [title]="'Email'" [data]="email"></app-detailscard>
-            <app-detailscard [icon]="house_icon" [title]="'Address'" [data]="address"></app-detailscard>
-            <app-detailscard [icon]="web_icon" [title]="'Website'" [data]="website"></app-detailscard>
+            <app-detailscard [icon]="calander_icon" [title]="'Birth Date'" [data]="contactData.birthday.substring(0,10)"></app-detailscard>
+            <app-detailscard [icon]="phone_icon" [title]="'Phone Number'" [data]="contactData.phone"></app-detailscard>
+            <app-detailscard [icon]="email_icon" [title]="'Email'" [data]="contactData.email"></app-detailscard>
+            <app-detailscard [icon]="house_icon" [title]="'Address'" [data]="contactData.address"></app-detailscard>
+            <app-detailscard [icon]="web_icon" [title]="'Website'" [data]="contactData.website"></app-detailscard>
         </div>
 
         <div class="details-group">
-            <app-detailscard [icon]="fb_icon" [title]="'Facebook'" [data]="facebook"></app-detailscard>
-            <app-detailscard [icon]="twitter_icon" [title]="'Twitter'" [data]="twitter"></app-detailscard>
-            <app-detailscard [icon]="instagram_icon" [title]="'Instagram'" [data]="instagram"></app-detailscard>
-            <app-detailscard [icon]="linkedin_icon" [title]="'Linkedin'" [data]="linkedin"></app-detailscard>
+            <app-detailscard [icon]="fb_icon" [title]="'Facebook'" [data]="contactData.facebook"></app-detailscard>
+            <app-detailscard [icon]="twitter_icon" [title]="'Twitter'" [data]="contactData.twitter"></app-detailscard>
+            <app-detailscard [icon]="instagram_icon" [title]="'Instagram'" [data]="contactData.instagram"></app-detailscard>
+            <app-detailscard [icon]="linkedin_icon" [title]="'Linkedin'" [data]="contactData.linkedin"></app-detailscard>
         </div>
 
     </div>

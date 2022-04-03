@@ -1,18 +1,20 @@
 @import "../../../assets/scss/variables.scss";
 
+
 .container {
   display: flex;
   position: relative;
-  width: min-content;
-  align-self: flex-end !important;
+  width: max-content;
 }
 
 .content {
+  display: flex;
+
   padding: 2rem 2rem;
   font-size: 1.8rem;
   min-height: 50px;
   min-width: 320px;
-  width: max-content;
+
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -20,11 +22,14 @@
 
   &-left {
     background-color: $light-gray;
+
+
   }
 
   &-right {
     background-color: $primary-color;
     color: white;
+
   }
 }
 

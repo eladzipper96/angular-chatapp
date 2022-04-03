@@ -15,22 +15,10 @@ export class ChatService {
     chatName$: BehaviorSubject<string> = new BehaviorSubject<string>('');
     chatImage$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-    socket: any = io(`${'http://localhost:4000'}`, {query: {'chatid': '0'}})
-    socket$: BehaviorSubject<any> = new BehaviorSubject<any>(io(`${'http://localhost:4000'}`, {query: {'chatid': '0'}}))
-      
-    listen(eventName: string) {
-
-        console.log(' a new listening happending')
-
-        return new Observable((subscriber) => {
-           this.socket.on(eventName, (data: any) => {
-               subscriber.next(data)
-           }) 
-        })
-    }
+    socket$: BehaviorSubject<any> = new BehaviorSubject<any>(io(`${environment.API_URL}`, {query: {'chatid': '0'}}))
 
     emit(eventName: string, data: any) {
-        this.socket.emit(eventName,{...data, year:'2022'})
+        this.socket$.getValue().emit(eventName,{...data, year:'2022'})
     }
 
     getSocket() {
@@ -45,19 +33,11 @@ export class ChatService {
 
         this.activeChatId$.next(id)
 
-        if(this.socket) {
-            this.socket.disconnect()
-        }
         const chatid = this.activeChatId$.getValue() as string
-        this.socket = io(`${'http://localhost:4000'}`, {
-            query: {'chatid': chatid}
-        })
 
-        // test
-        this.socket$.next(io(`${'http://localhost:4000'}`, {
+        this.socket$.next(io(`${environment.API_URL}`, {
             query: {'chatid': chatid}
         }))
-
 
     }
 
@@ -85,6 +65,7 @@ export class ChatService {
         const current = this.chatContent$.getValue()
         this.chatContent$.next([...current,new_msg])
     }
+
 
 
 }

@@ -9,10 +9,11 @@ import { UserDataService } from 'src/app/userdata.service';
 export class ChatitemComponent implements OnInit {
 
   @Input() data: any;
+  @Input() contactImage!: string;
 
   userId!: string;
+  userImage!: string
 
-  image: string = 'https://i.ibb.co/TTGJN4C/dog-2.jpg'
   content: string = 'moshe the king is the best!'
   name: string = 'Israel Israeli'
   time: string = '12:22'
@@ -21,7 +22,11 @@ export class ChatitemComponent implements OnInit {
   constructor(private UserDataService:UserDataService) { }
 
   ngOnInit(): void {
+
+    console.log(this.data)
+
     this.userId = this.UserDataService.getUserId()
+    this.userImage = this.UserDataService.getProfilePicture()
     this.content = this.data.value
     this.name = this.data.authorname
     this.time = this.data.time

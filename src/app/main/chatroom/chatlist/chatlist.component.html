@@ -5,7 +5,7 @@
         *ngFor="let chat of chatList"
         [image]="chat.profile_picture"
         [name]="chat.name"
-        [content]="chat.content[chat.content.length-1].value"
+        [content]="chat.content[chat.content.length-1].authorname+': '+chat.content[chat.content.length-1].value"
         [time]="chat.content[chat.content.length-1].time"
         (click)="onClickHandler(chat)"
         ></app-list-item>

@@ -25,4 +25,8 @@ export class ActionBarComponent implements OnInit {
     this.searchEvent.emit(new_value)
   }
 
+  AddFriendHandler(): void {
+    alert('friend')
+  }
+
 }

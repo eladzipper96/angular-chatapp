@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+@import '../../assets/scss/variables.scss';
+
 .container {
   display: grid;
   grid-template-rows: 1fr;
@@ -5,11 +8,38 @@
 }
 
 .ph {
+
   &-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     font-size: 3rem;
-    padding: 2rem 2rem;
+  }
+
+  &-header {
+    position: absolute;
+    font-size: 7rem;
+    font-family: 'Lilita One', cursive;
+    color: $primary-color;
+    left: 13.5rem;
+    top:5rem;
+  }
+
+  &-sun {
+    position: absolute;
+    right: -15rem;
+    top: -7rem;
+    transform: rotate(-140deg);
+  }
+
+  &-sand {
+    height: 200px;
+    width: 100%;
+    position: absolute;
+    bottom: 4rem;
+  }
+
+  &-wave {
+    position: absolute;
+    bottom: 0rem;
   }
 }

@@ -1,4 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserDataService } from 'src/app/userdata.service';
+
+import { userPersonalData } from 'src/interfaces/user.interface';
 
 @Component({
   selector: 'app-profiledetails',
@@ -19,14 +22,13 @@ export class ProfiledetailsComponent implements OnInit {
     linkedin_icon: string = '../../../../assets/icons/linkedin.svg'
 
     // Data //
-    profileImage: string = 'https://i.ibb.co/TTGJN4C/dog-2.jpg'
-    name: string = 'Israel Israeli'
-    @Input() data: any;
+    userdata!: userPersonalData;
 
-  constructor() { }
+  constructor(private userDataService:UserDataService) { }
 
   ngOnInit(): void {
 
+    this.userdata = this.userDataService.getPersonalData()
 
   }
 

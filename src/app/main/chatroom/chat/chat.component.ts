@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ChatService } from 'src/app/chat.service';
 import { UserDataService } from 'src/app/userdata.service';
@@ -7,15 +7,16 @@ import { chatContent } from 'src/interfaces/chat.interface';
 import { contact } from 'src/interfaces/contact.interface';
 
 import { dateMinuteHandler } from 'src/helper_functions/dates';
+import { playMessage } from '../../../../helper_functions/sounds'
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss','./chatplaceholder.component.scss']
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
-  @ViewChild('chat') private ChatElemment!: ElementRef;
+  @ViewChild('chatContent') private chatContent!: ElementRef;
 
   // Icons //
   options: string =  '../../../../assets/icons/options.svg'
@@ -32,9 +33,9 @@ export class ChatComponent implements OnInit, OnDestroy {
   socketSubscription = new Subscription
 
   // Data //
-  topImage:string = 'https://i.ibb.co/TTGJN4C/dog-2.jpg'
-  name: string = 'Israel Israeli'
-  lastSeen: string = '12:32'
+  contactImage:string = ''
+  name: string = ''
+  lastSeen: string = '99:99'
 
   chatId!: string | boolean;
   messagesList!: chatContent[];
@@ -47,11 +48,14 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+
     this.chatIdSubscription = this.ChatService.getActiveChatId().subscribe(val => this.chatId = val)
     this.chatContentSubscription = this.ChatService.getChatContent().subscribe(val => this.messagesList = val)
     this.chatNameSubscription = this.ChatService.getChatDetails().name.subscribe(val => this.name = val)
-    this.chatImageSubscription = this.ChatService.getChatDetails().image.subscribe(val =>this.topImage = val )
+    this.chatImageSubscription = this.ChatService.getChatDetails().image.subscribe(val =>this.contactImage = val)
 
+    this.scrollToBottom()
+    
     this.socketSubscription = this.ChatService.getSocket().subscribe((socket: any) => {
       socket.on('message', (msg: chatContent) => {
         this.reviceMessageHandler(msg)
@@ -59,6 +63,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     })
 
   }
+
+  ngAfterViewChecked(): void {
+    this.scrollToBottom()
+  }
+
 
   ngOnDestroy(): void {
     this.chatIdSubscription.unsubscribe()
@@ -77,6 +86,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     if(msg_content.author !== this.UserDataService.getUserId() && msg_content.value.length > 0) {
       this.ChatService.AddMessage(msg_content)
       this.UserDataService.updateChatList(this.chatId as string,msg_content)
+      playMessage()
     }
   }
 
@@ -104,6 +114,12 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.ChatService.emit('message', new_msg)
     this.message = ''
   }
+
+  scrollToBottom(): void {
+    try {
+        this.chatContent.nativeElement.scrollTop = this.chatContent.nativeElement.scrollHeight;
+    } catch(err) { }                 
+}
 
 
 

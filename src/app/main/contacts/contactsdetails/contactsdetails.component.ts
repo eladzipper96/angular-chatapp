@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ContactsService } from 'src/app/contacts.service';
 
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { contact } from 'src/interfaces/contact.interface';
   templateUrl: './contactsdetails.component.html',
   styleUrls: ['./contactsdetails.component.scss','./placeholder.component.scss']
 })
-export class ContactsdetailsComponent implements OnInit, OnDestroy {
+export class ContactsdetailsComponent implements OnInit {
 
   // Icons //
   calander_icon: string = '../../../../assets/icons/calander.svg'
@@ -30,36 +30,16 @@ export class ContactsdetailsComponent implements OnInit, OnDestroy {
 
   // Data //
   showContact: boolean = false
-
-  image: string = 'https://i.ibb.co/TTGJN4C/dog-2.jpg'
-  name: string = 'Israel Israeli'
-  birthdate: string = ''
-  phone: string = ''
-  email: string = ''
-  address: string = ''
-  website: string = ''
-  facebook: string = ''
-  twitter: string = ''
-  instagram: string = ''
-  linkedin: string = ''
+  contactData!: contact;
 
   constructor(private ContactService: ContactsService) { }
 
   ngOnInit(): void {
+
     this.selectedContactSubscription = this.ContactService.getSelectedContact().subscribe(isContact => {
       if(isContact) {
         const contact = isContact as contact
-        this.name = `${contact.name} ${contact.last_name}`
-        this.image = contact.profile_picture
-        this.birthdate = contact.birthday.substring(0,10)
-        this.phone = contact.phone
-        this.email = contact.email
-        this.address = contact.address
-        this.website = contact.website
-        this.facebook = contact.website
-        this.twitter = contact.twitter
-        this.instagram = contact.instagram
-        this.linkedin = contact.linkedin
+        this.contactData = isContact as contact
       }
       this.showContact = !!isContact
     })
