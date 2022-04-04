@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewChecked, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ChatService } from 'src/app/main/chatroom/store/chat.service';
-import { UserDataService } from 'src/app/userdata.service';
+import { UserDataService } from 'src/app/store/UserData.service';
 
 import { chatContent } from 'src/interfaces/chat.interface';
 import { contact } from 'src/interfaces/contact.interface';

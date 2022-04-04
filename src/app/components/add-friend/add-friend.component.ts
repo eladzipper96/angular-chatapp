@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DomUiService } from 'src/app/dom-ui.service';
+import { DomUiService } from 'src/app/services/dom-ui.service';
 
 @Component({
   selector: 'app-add-friend',

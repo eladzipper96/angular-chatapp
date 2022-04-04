@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserDataService } from 'src/app/userdata.service';
+import { UserDataService } from 'src/app/store/UserData.service';
 
 import { Subscription } from 'rxjs';
 import { ContactsService } from 'src/app/main/contacts/state/contacts.service';

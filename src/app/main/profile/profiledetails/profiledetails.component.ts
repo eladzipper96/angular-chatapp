@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserDataService } from 'src/app/userdata.service';
+import { UserDataService } from 'src/app/store/UserData.service';
 
 import { userPersonalData } from 'src/interfaces/user.interface';
 

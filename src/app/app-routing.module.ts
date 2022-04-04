@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth-guard.service';
-import { LoginGuard } from './login-guard.service';
+import { AuthGuard } from './services/auth-guard.service';
+import { LoginGuard } from './services/login-guard.service';
 import { ChatroomComponent } from './main/chatroom/chatroom.component';
 import { ContactsComponent } from './main/contacts/contacts.component';
 import { LoginComponent } from './main/login/login.component';

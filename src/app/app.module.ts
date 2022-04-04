@@ -16,6 +16,7 @@ import { ChatRoomModule } from './main/chatroom/chatroom.module';
 import { AddFriendComponent } from './components/add-friend/add-friend.component';
 import { OpacityscreenComponent } from './cards/opacityscreen/opacityscreen.component';
 import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 // import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 // import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 
@@ -27,6 +28,7 @@ import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
     LoginloaderComponent,
     AddFriendComponent,
     OpacityscreenComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,

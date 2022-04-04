@@ -32,6 +32,15 @@
     transform: rotate(-140deg);
   }
 
+  &-kid {
+    position: absolute;
+    width: 300px;
+    transform: scaleX(-1);
+    bottom: 18rem;
+    right: 5rem;
+    z-index: 10;
+  }
+
   &-sand {
     height: 200px;
     width: 100%;

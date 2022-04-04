@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { DomUiService } from 'src/app/dom-ui.service';
+import { DomUiService } from 'src/app/services/dom-ui.service';
 
 @Component({
   selector: 'app-action-bar',
@@ -28,6 +28,10 @@ export class ActionBarComponent implements OnInit {
 
   AddFriendHandler(): void {
     this.DomUiService.setShowAddFriend(true)
+  }
+
+  NotificationsHandler(): void {
+    this.DomUiService.setShowNotifications(true)
   }
 
 }

@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { environment } from 'src/environments/environment';
-import { AuthService } from 'src/app/auth.service';
-import { UserDataService } from 'src/app/userdata.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserDataService } from 'src/app/store/UserData.service';
 
 import { user } from 'src/interfaces/user.interface';
 import { Router } from '@angular/router';

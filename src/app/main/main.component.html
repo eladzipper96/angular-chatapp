@@ -1,12 +1,14 @@
 <app-loginloader *ngIf="loginProcess; else websiteContent"></app-loginloader>
 <ng-template #websiteContent>
     <app-add-friend *ngIf="showAddFriend"></app-add-friend>
+    <app-notifications *ngIf="showNotifications"></app-notifications>
     <div class="container">
         <app-sidebar></app-sidebar>
         <div>
             <div class="ph-container" *ngIf="showOnEntrance; else content">
                 <span class="ph-header">Welcome!</span>
                 <img class="ph-sun" [src]='sun_image'/>
+                <img class="ph-kid" [src]='kid_image'/>
                 <img class="ph-sand" [src]='sand_image'/>
                 <img class="ph-wave" [src]='wave_image'/>
             </div>

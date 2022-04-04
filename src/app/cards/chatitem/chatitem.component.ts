@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserDataService } from 'src/app/userdata.service';
+import { UserDataService } from 'src/app/store/UserData.service';
 
 @Component({
   selector: 'app-chatitem',

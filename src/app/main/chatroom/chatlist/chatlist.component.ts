@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'src/app/main/chatroom/store/chat.service';
-import { UserDataService } from 'src/app/userdata.service';
+import { UserDataService } from 'src/app/store/UserData.service';
 
 import {chat} from '../../../../interfaces/chat.interface'
 
