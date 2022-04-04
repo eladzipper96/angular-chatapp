@@ -13,6 +13,11 @@ import { LoginModule } from './main/login/login.module';
 import { ProfileModule } from './main/profile/profile.module';
 import { ContactsModule } from './main/contacts/contacts.module';
 import { ChatRoomModule } from './main/chatroom/chatroom.module';
+import { AddFriendComponent } from './components/add-friend/add-friend.component';
+import { OpacityscreenComponent } from './cards/opacityscreen/opacityscreen.component';
+import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
+// import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+// import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 
 @NgModule({
   declarations: [
@@ -20,6 +25,8 @@ import { ChatRoomModule } from './main/chatroom/chatroom.module';
     MainComponent,
     SidebarComponent,
     LoginloaderComponent,
+    AddFriendComponent,
+    OpacityscreenComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,8 +38,10 @@ import { ChatRoomModule } from './main/chatroom/chatroom.module';
     ProfileModule,
     ContactsModule,
     ChatRoomModule,
+    // environment.production ? [] : AkitaNgDevtools.forRoot(),
+    // AkitaNgRouterStoreModule,
   ],
-  providers: [],
+  providers: [{ provide: NG_ENTITY_SERVICE_CONFIG, useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' }}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

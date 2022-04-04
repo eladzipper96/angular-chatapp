@@ -3,9 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http'
 import { UserDataService } from 'src/app/userdata.service';
 
-import { userPersonalData } from 'src/interfaces/user.interface';
+
 import { environment } from 'src/environments/environment';
-import { observableExtractor } from 'src/helper_functions/observables';
 
 @Component({
   selector: 'app-profileupdate',
@@ -20,7 +19,7 @@ export class ProfileupdateComponent implements OnInit {
   passwordForm!: FormGroup;
 
   // Data //
-  data!: userPersonalData;
+  data!: any;
   AccountFormFeedBack: string = ''
   SocialFormFeedBack: string = ''
   PasswordFormFeedBack: string = '' 
@@ -29,25 +28,25 @@ export class ProfileupdateComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const personalData = this.UserDataService.getPersonalData()
+    this.data = this.UserDataService.getPersonalDataSnapshop()
 
     this.accountForm = new FormGroup({
-      'name': new FormControl(observableExtractor(personalData.name)),
-      'last_name': new FormControl(observableExtractor(personalData.last_name)),
-      'email': new FormControl(observableExtractor(personalData.email)),
-      'birthdate': new FormControl(observableExtractor(personalData.birthdate)),
-      'phone': new FormControl(observableExtractor(personalData.phone)),
-      'website': new FormControl(observableExtractor(personalData.website)),
-      'address': new FormControl(observableExtractor(personalData.address)),
-      'moto': new FormControl(observableExtractor(personalData.moto)),
-      'profile_picture': new FormControl(observableExtractor(personalData.profile_picture)),
+      'name': new FormControl(this.data.name),
+      'last_name': new FormControl(this.data.last_name),
+      'email': new FormControl(this.data.email),
+      'birthdate': new FormControl(this.data.birthdate),
+      'phone': new FormControl(this.data.phone),
+      'website': new FormControl(this.data.website),
+      'address': new FormControl(this.data.address),
+      'moto': new FormControl(this.data.moto),
+      'profile_picture': new FormControl(this.data.profile_picture),
     })
 
     this.socialForm = new FormGroup({
-      'facebook': new FormControl(observableExtractor(personalData.facebook)),
-      'twitter': new FormControl(observableExtractor(personalData.twitter)),
-      'instagram': new FormControl(observableExtractor(personalData.instagram)),
-      'linkedin': new FormControl(observableExtractor(personalData.linkedin)),
+      'facebook': new FormControl(this.data.facebook),
+      'twitter': new FormControl(this.data.twitter),
+      'instagram': new FormControl(this.data.instagram),
+      'linkedin': new FormControl(this.data.linkedin),
     })
 
     this.passwordForm = new FormGroup({

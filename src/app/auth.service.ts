@@ -10,8 +10,6 @@ export class AuthService {
   LoginProcess$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   showOnEntrance$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
 
-  constructor() { }
-
   isLoggedIn(): Observable<boolean> {
     return this.loggedIn$.asObservable()
   }

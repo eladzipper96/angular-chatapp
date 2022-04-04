@@ -12,6 +12,10 @@ import { ListItemModule } from "src/app/cards/list-item/list-item.module";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
+import { ChatStore } from "./store/chat.store";
+import { ChatQuery } from "./store/chat.query";
+import { ChatService } from "./store/chat.service";
+
 @NgModule({
     declarations: [
         ChatroomComponent,
@@ -25,6 +29,11 @@ import { FormsModule } from "@angular/forms";
         PageCardModule,
         ActionBarModule,
         ListItemModule
+    ],
+    providers:[
+        ChatStore,
+        ChatQuery,
+        ChatService
     ],
     exports: [ChatroomComponent]
 

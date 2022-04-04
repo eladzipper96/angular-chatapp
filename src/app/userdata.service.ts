@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, combineLatest, map } from 'rxjs';
 
 import {chat, chatContent} from '../interfaces/chat.interface'
 import {contact} from 'src/interfaces/contact.interface';
@@ -61,7 +61,6 @@ export class UserDataService {
     }
 
     getPersonalData() {
-
         return {
             name: this.name$.asObservable(),
             last_name: this.last_name$.asObservable(),
@@ -79,7 +78,23 @@ export class UserDataService {
         }
     }
 
-
+    getPersonalDataSnapshop() {
+        return {
+            name: this.name$.getValue(),
+            last_name: this.last_name$.getValue(),
+            email: this.email$.getValue(),
+            birthdate: this.birthday$.getValue(),
+            phone: this.phone$.getValue(),
+            profile_picture: this.profile_picture$.getValue(),
+            website: this.website$.getValue(),
+            moto: this.moto$.getValue(),
+            address: this.address$.getValue(),
+            facebook: this.facebook$.getValue(),
+            instagram: this.instagram$.getValue(),
+            linkedin: this.linkedin$.getValue(),
+            twitter: this.twitter$.getValue()
+        }
+    }
 
     setPersonalAccountData(obj: any) {
 

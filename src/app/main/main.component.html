@@ -1,5 +1,6 @@
 <app-loginloader *ngIf="loginProcess; else websiteContent"></app-loginloader>
 <ng-template #websiteContent>
+    <app-add-friend *ngIf="showAddFriend"></app-add-friend>
     <div class="container">
         <app-sidebar></app-sidebar>
         <div>

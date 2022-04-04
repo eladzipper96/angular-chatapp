@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
+import { DomUiService } from '../dom-ui.service';
 
 @Component({
   selector: 'app-main',
@@ -18,25 +19,34 @@ export class MainComponent implements OnInit, OnDestroy {
   // Subscriptions
   loginProcessSubscription: Subscription =  new Subscription
   showOnEntranceSubscription: Subscription =  new Subscription
+  showAddFriendSubscription: Subscription = new Subscription
+  showNotifcationsSubscription: Subscription = new Subscription
 
   // Data
   loginProcess: boolean = false
   showOnEntrance: boolean = true
+  showAddFriend: boolean = false
+  showNotifcations: boolean = false
 
-  constructor(private AuthService: AuthService, private router:ActivatedRoute) { }
+  constructor(private AuthService: AuthService,private DomUiSerivce:DomUiService, private router:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.AuthService.inLoginProcess().subscribe(value => {
+
+    this.loginProcessSubscription = this.AuthService.inLoginProcess().subscribe(value => {
       this.loginProcess = value
     })
 
-    this.AuthService.getShowOnEntrance().subscribe(value => this.showOnEntrance = value)
+    this.showOnEntranceSubscription = this.AuthService.getShowOnEntrance().subscribe(value => this.showOnEntrance = value)
+    this.showAddFriendSubscription = this.DomUiSerivce.getShowAddFriend().subscribe(value => this.showAddFriend = value)
+    this.showNotifcationsSubscription = this.DomUiSerivce.getShowNotifcations().subscribe(value => this.showNotifcations = value)
 
   }
 
   ngOnDestroy(): void {
     this.loginProcessSubscription.unsubscribe()
     this.showOnEntranceSubscription.unsubscribe()
+    this.showAddFriendSubscription.unsubscribe()
+    this.showNotifcationsSubscription.unsubscribe()
   }
 
 }

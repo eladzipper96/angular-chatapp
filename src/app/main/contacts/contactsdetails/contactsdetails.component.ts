@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ContactsService } from 'src/app/contacts.service';
+import { ContactsService } from 'src/app/main/contacts/state/contacts.service';
+
 
 import { Subscription } from 'rxjs';
 import { contact } from 'src/interfaces/contact.interface';
+import { ContactsQuery } from '../state/contacts.query';
 
 @Component({
   selector: 'app-contactsdetails',
@@ -32,13 +34,12 @@ export class ContactsdetailsComponent implements OnInit {
   showContact: boolean = false
   contactData!: contact;
 
-  constructor(private ContactService: ContactsService) { }
+  constructor(private ContactService: ContactsService, private ContactsQuery:ContactsQuery) { }
 
   ngOnInit(): void {
 
-    this.selectedContactSubscription = this.ContactService.getSelectedContact().subscribe(isContact => {
+    this.selectedContactSubscription = this.ContactsQuery.selectContact$.subscribe(isContact => {
       if(isContact) {
-        const contact = isContact as contact
         this.contactData = isContact as contact
       }
       this.showContact = !!isContact

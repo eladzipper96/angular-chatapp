@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { DomUiService } from 'src/app/dom-ui.service';
 
 @Component({
   selector: 'app-action-bar',
@@ -15,7 +16,7 @@ export class ActionBarComponent implements OnInit {
   addfriend_icon = '../../../assets/icons/add_friend.svg'
   search_icon = '../../../assets/icons/search.svg'
 
-  constructor() { }
+  constructor(private DomUiService:DomUiService) { }
 
   ngOnInit(): void {
   }
@@ -26,7 +27,7 @@ export class ActionBarComponent implements OnInit {
   }
 
   AddFriendHandler(): void {
-    alert('friend')
+    this.DomUiService.setShowAddFriend(true)
   }
 
 }

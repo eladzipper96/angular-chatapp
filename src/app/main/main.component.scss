@@ -5,6 +5,7 @@
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 80px 1fr;
+  position: relative;
 }
 
 .ph {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { UserDataService } from 'src/app/userdata.service';
 
 import { userPersonalData } from 'src/interfaces/user.interface';
@@ -22,13 +23,14 @@ export class ProfiledetailsComponent implements OnInit {
     linkedin_icon: string = '../../../../assets/icons/linkedin.svg'
 
     // Data //
-    userdata!: userPersonalData;
+    userdata$!: any;
 
   constructor(private userDataService:UserDataService) { }
 
   ngOnInit(): void {
 
-    this.userdata = this.userDataService.getPersonalData()
+    this.userdata$ = this.userDataService.getPersonalData()
+    
 
   }
 

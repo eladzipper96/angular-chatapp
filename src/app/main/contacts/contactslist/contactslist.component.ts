@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserDataService } from 'src/app/userdata.service';
 
 import { Subscription } from 'rxjs';
-import { ContactsService } from 'src/app/contacts.service';
+import { ContactsService } from 'src/app/main/contacts/state/contacts.service';
 import { contact } from 'src/interfaces/contact.interface';
 
 @Component({
