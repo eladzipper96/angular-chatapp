@@ -13,7 +13,7 @@ export class OpacityscreenComponent implements OnInit {
 
   exit_icon: string = '../../assets/icons/exit.svg'
 
-  constructor(private DomUIService:DomUiService) { }
+  constructor(private DomUiService:DomUiService) { }
 
   ngOnInit(): void {
   }

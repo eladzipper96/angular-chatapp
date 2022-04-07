@@ -18,12 +18,12 @@ export class ChatlistComponent implements OnInit {
   ngOnInit(): void {
     this.chatList = this.UserDataService.getChatList()
   }
+  
 
   onClickHandler(chat: chat) {
-    console.log(chat)
     this.ChatService.setActiveChatId(chat.id)
     this.ChatService.setChatContent(chat.content)
-    this.ChatService.setChatDetails({name: chat.name, image: chat.profile_picture})
+    this.ChatService.setChatDetails({name: chat.name, image: chat.profile_picture, contactId: chat.contactId})
   }
 
   updateChatList(searchParam: string): void {

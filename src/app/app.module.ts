@@ -13,12 +13,12 @@ import { LoginModule } from './main/login/login.module';
 import { ProfileModule } from './main/profile/profile.module';
 import { ContactsModule } from './main/contacts/contacts.module';
 import { ChatRoomModule } from './main/chatroom/chatroom.module';
+import { ListItemModule } from './cards/list-item/list-item.module';
 import { AddFriendComponent } from './components/add-friend/add-friend.component';
 import { OpacityscreenComponent } from './cards/opacityscreen/opacityscreen.component';
 import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
 import { NotificationsComponent } from './components/notifications/notifications.component';
-// import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
-// import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { NotificationCardComponent } from './cards/notification-card/notification-card.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +29,7 @@ import { NotificationsComponent } from './components/notifications/notifications
     AddFriendComponent,
     OpacityscreenComponent,
     NotificationsComponent,
+    NotificationCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,8 +41,7 @@ import { NotificationsComponent } from './components/notifications/notifications
     ProfileModule,
     ContactsModule,
     ChatRoomModule,
-    // environment.production ? [] : AkitaNgDevtools.forRoot(),
-    // AkitaNgRouterStoreModule,
+    ListItemModule
   ],
   providers: [{ provide: NG_ENTITY_SERVICE_CONFIG, useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' }}],
   bootstrap: [AppComponent]

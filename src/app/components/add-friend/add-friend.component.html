@@ -1,7 +1,10 @@
 <app-opacityscreen [title]="'Add Friend'" [onExit]="exitHandler">
         <div class="main">
-            <div class="main-title">Please Enter Friends Username</div>
-            <input/>
-            <div class="main-submit">Submit</div>
+            <app-spinner *ngIf="showSpinner; else AddFriend"></app-spinner>
+            <ng-template #AddFriend>
+                <div class="main-title">Please Enter Friends Username</div>
+                <input [(ngModel)]='contact_username'/>
+                <div class="main-submit" (click)='submitHandler()'>Submit</div>
+            </ng-template>
         </div>
 </app-opacityscreen>

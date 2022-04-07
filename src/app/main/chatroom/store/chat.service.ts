@@ -34,6 +34,8 @@ export class ChatService {
             activeChatId: id
         }))
 
+        this.socket$.subscribe(socket => socket.disconnect()).unsubscribe()
+
         this.socket$.next(io(`${environment.API_URL}`, {
             query: {'chatid': id}
         }))
@@ -55,11 +57,12 @@ export class ChatService {
         return this.ChatQuery.getChatDetails()
     }
 
-    setChatDetails(values: {name: string, image:string}) {
+    setChatDetails(values: {name: string, image:string, contactId: string}) {
         this.ChatStore.update(state => ({
             ...state,
             chatName: values.name,
-            chatImage: values.image
+            chatImage: values.image,
+            chatContactId: values.contactId
         }))
     }
 
@@ -71,6 +74,13 @@ export class ChatService {
             ...state,
             chatContent: [...currentContent,newMessage]
         }))
+    }
+
+    emitToControlSocket(contactid: string,msg: any) {
+        console.log('emitting to '+contactid)
+        const socket = io(`${environment.API_URL}`, {query: {'chatid': contactid}});
+        socket.emit('message', msg)
+        // socket.disconnect()
     }
 
 

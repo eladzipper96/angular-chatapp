@@ -6,7 +6,8 @@ export interface ChatState {
    activeChatId: string | boolean;
    chatContent: chatContent[];
    chatName: string;
-   chatImage: string
+   chatImage: string;
+   chatContactId: string;
 }
 
 export function createInitialState(): ChatState {
@@ -14,7 +15,8 @@ export function createInitialState(): ChatState {
     activeChatId: false,
     chatContent: [],
     chatName: '',
-    chatImage: ''
+    chatImage: '',
+    chatContactId: '',
   };
 }
 

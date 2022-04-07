@@ -1,7 +1,11 @@
 <div class="container" *ngIf="showContact; else noselectedcontact">
     <div class="top">
-        <img [src]='contactData.profile_picture' alt="'profile'"/>
+        <img class="top-image" [src]='contactData.profile_picture' alt="'profile'"/>
         <span class="top-name">{{contactData.name+" "+contactData.last_name}}</span>
+        <div class="top-buttons">
+            <img [src]='chats' alt='chats' (click)='addToActiveChats()'/>
+            <img [src]='block' alt='block'/>
+        </div>
     </div>
     <div class="details">
         

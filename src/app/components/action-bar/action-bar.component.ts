@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, OnDestroy, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DomUiService } from 'src/app/services/dom-ui.service';
 
 @Component({
@@ -6,19 +7,33 @@ import { DomUiService } from 'src/app/services/dom-ui.service';
   templateUrl: './action-bar.component.html',
   styleUrls: ['./action-bar.component.scss']
 })
-export class ActionBarComponent implements OnInit {
+export class ActionBarComponent implements OnInit, OnDestroy {
 
-  @Output() searchEvent = new EventEmitter()
-  searchValue: string = ''
-
-  options_icon = '../../../assets/icons/options.svg'
+  // Icons
+  plus_icon = '../../../assets/icons/plus.svg'
   notifcations_icon = '../../../assets/icons/notifcations.svg'
+  notifcations_black_icon = '../../../assets/icons/notifcations_black.svg'
   addfriend_icon = '../../../assets/icons/add_friend.svg'
-  search_icon = '../../../assets/icons/search.svg'
+  search_icon = '../../../assets/icons/search.svg'  
 
-  constructor(private DomUiService:DomUiService) { }
+  // Outputs //
+  @Output() searchEvent = new EventEmitter()
+
+  // Subscription
+  hasNewNotificationSubscription: Subscription = new Subscription
+
+  // Data
+  searchValue: string = ''
+  hasNewNotification: boolean = false
+
+  constructor(private DomUiService:DomUiService) {}
 
   ngOnInit(): void {
+    this.DomUiService.getHasNewNotifications().subscribe(val => this.hasNewNotification = val)
+  }
+
+  ngOnDestroy(): void {
+    this.hasNewNotificationSubscription.unsubscribe()
   }
 
   emitSearchValue(new_value: string) {
@@ -32,6 +47,7 @@ export class ActionBarComponent implements OnInit {
 
   NotificationsHandler(): void {
     this.DomUiService.setShowNotifications(true)
+    this.DomUiService.setHasNewNotifications(false)
   }
 
 }

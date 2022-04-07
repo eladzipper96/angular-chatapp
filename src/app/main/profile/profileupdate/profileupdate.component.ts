@@ -34,7 +34,7 @@ export class ProfileupdateComponent implements OnInit {
       'name': new FormControl(this.data.name),
       'last_name': new FormControl(this.data.last_name),
       'email': new FormControl(this.data.email),
-      'birthdate': new FormControl(this.data.birthdate),
+      'birthdate': new FormControl(this.data.birthday),
       'phone': new FormControl(this.data.phone),
       'website': new FormControl(this.data.website),
       'address': new FormControl(this.data.address),
@@ -60,7 +60,7 @@ export class ProfileupdateComponent implements OnInit {
   accountFormSubmitHandler(): void {
 
     const accountData = {
-      id: this.UserDataService.getUserId(),
+      id: this.UserDataService.getUserIdSnapshot(),
       address: this.accountForm.value.address,
       name: this.accountForm.value.name,
       last_name: this.accountForm.value.last_name,
@@ -82,7 +82,7 @@ export class ProfileupdateComponent implements OnInit {
   socialFormSubmitHandler(): void {
 
     const socialData = {
-      id: this.UserDataService.getUserId(),
+      id: this.UserDataService.getUserIdSnapshot(),
       facebook: this.socialForm.value.facebook,
       twitter: this.socialForm.value.twitter,
       instagram: this.socialForm.value.instagram,

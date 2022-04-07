@@ -5,6 +5,8 @@ import { ContactsService } from 'src/app/main/contacts/state/contacts.service';
 import { Subscription } from 'rxjs';
 import { contact } from 'src/interfaces/contact.interface';
 import { ContactsQuery } from '../state/contacts.query';
+import { UserDataService } from 'src/app/store/UserData.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contactsdetails',
@@ -23,6 +25,8 @@ export class ContactsdetailsComponent implements OnInit {
   twitter_icon: string = '../../../../assets/icons/twitter.svg'
   instagram_icon: string = '../../../../assets/icons/instagram.svg'
   linkedin_icon: string = '../../../../assets/icons/linkedin.svg'
+  block: string = '../../../../assets/icons/block_blue.svg'
+  chats: string = '../../../../assets/icons/chats_blue.svg'
 
   //Images//
   people_searching: string = '../../../../assets/images/people_searching.jpg'
@@ -34,7 +38,10 @@ export class ContactsdetailsComponent implements OnInit {
   showContact: boolean = false
   contactData!: contact;
 
-  constructor(private ContactService: ContactsService, private ContactsQuery:ContactsQuery) { }
+  constructor(private ContactService: ContactsService,
+     private ContactsQuery:ContactsQuery,
+     private UserDataService:UserDataService,
+     private Router:Router) { }
 
   ngOnInit(): void {
 
@@ -48,6 +55,16 @@ export class ContactsdetailsComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.selectedContactSubscription.unsubscribe()
+  }
+
+  addToActiveChats() {
+    const chats = this.UserDataService.getChatsSnapshot()
+
+    chats.forEach((chat) => {
+      if(chat.owners.includes(this.contactData.id)) {
+        this.UserDataService.addNewActiveChat(chat.id)
+      }
+    })
   }
 
 }

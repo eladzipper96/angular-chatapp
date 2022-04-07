@@ -3,16 +3,20 @@
 .container {
     width: 100%;
     height: 100vh;
-    background-color: rgba(207, 207, 207, 0.322);
     position: absolute;
-    z-index: 1000;
+    z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
 
-
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(207, 207, 207, 0.322);
+}
 
 .main {
     padding: 2rem 2rem;
@@ -22,6 +26,7 @@
     min-width: 400px;
     gap: 2rem;
     position: relative;
+    overflow: hidden;
 
     &-title {
         align-self: center;

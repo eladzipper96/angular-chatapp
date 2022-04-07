@@ -5,7 +5,8 @@ export interface chat {
     type: string,
     updatedAt: string,
     name: string,
-    profile_picture: string
+    profile_picture: string,
+    contactId: string
 }
 
 export interface chatContent {

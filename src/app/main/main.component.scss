@@ -25,6 +25,15 @@
     top:5rem;
   }
 
+  &-title {
+    align-self: center;
+    font-family: Pretty;
+    font-size: 10rem;
+    color: $primary-color;
+    margin-top: 15rem;
+
+  }
+
   &-sun {
     position: absolute;
     right: -15rem;

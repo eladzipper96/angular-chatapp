@@ -12,6 +12,7 @@ export interface user {
     notifications: notifications[]
 
     _id: string
+    username: string
     updatedAt: string
     email: string
     birthday: string

@@ -18,6 +18,7 @@ import { SpinnerComponent } from "src/app/components/spinner/spinner.component";
 ],
  exports: [
  LoginComponent,
+ SpinnerComponent
  ]
 })
 export class LoginModule {}

@@ -1,0 +1,78 @@
+@import '../../../assets/scss/variables.scss';
+
+.container {
+    width: 100%;
+    min-height: 80px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: $primary-color;
+    display: flex;
+    align-items: center;
+    padding: 0rem 1rem;
+    gap: 1rem;
+
+    &-image {
+
+        height: 50px;
+        border-radius: 50%;
+
+        img {
+
+            height: 100%;
+            border-radius: 50%;
+        }
+    }
+
+    &-content {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        position: relative;
+
+        &-exit {
+            position: absolute;
+            top: 0;
+            right: -0.5rem;
+            cursor: pointer;
+            & img {
+                width: 15px;
+            }
+        }
+
+        &-name {
+            font-size: 1.4rem;
+            color: $secondary-color
+        }
+
+        &-desc {
+            font-size: 1.2rem;
+        }
+
+        &-buttons {
+            font-size: 1.2rem;
+            display: flex;
+            gap: 0.5rem;
+
+            & span {
+                cursor: pointer;
+                color: white;
+                border-style: solid;
+                border-width: 1px;
+                padding: 0.25rem 1rem;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+        }
+
+        &-accept {
+            background-color: $primary-color;
+        }
+
+        &-decline {
+            background-color: red;
+        }
+
+    }
+}

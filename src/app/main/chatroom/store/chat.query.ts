@@ -12,6 +12,7 @@ export class ChatQuery extends Query<ChatState> {
     chatContent$: Observable<chatContent[]> = this.select('chatContent')
     chatName$: Observable<string> = this.select('chatName')
     chatImage$: Observable<string> = this.select('chatImage')
+    chatContactId$: Observable<string> = this.select('chatContactId')
 
 
   constructor(protected override store: ChatStore) {
@@ -25,7 +26,8 @@ export class ChatQuery extends Query<ChatState> {
   getChatDetails() {
     return {
       name: this.chatName$,
-      image: this.chatImage$
+      image: this.chatImage$,
+      contactId: this.chatContactId$,
   }
   }
 

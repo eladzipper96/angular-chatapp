@@ -1,8 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+
 import { AuthService } from '../services/auth.service';
+import { ControlSocketService } from '../services/control-socket.service';
 import { DomUiService } from '../services/dom-ui.service';
+import { UserDataService } from '../store/UserData.service';
+
+import { notifications } from 'src/interfaces/notifications.interface';
+
+import { playNotification, playMessage } from 'src/helper_functions/sounds';
+import { chatContent } from 'src/interfaces/chat.interface';
 
 @Component({
   selector: 'app-main',
@@ -22,6 +29,7 @@ export class MainComponent implements OnInit, OnDestroy {
   showOnEntranceSubscription: Subscription =  new Subscription
   showAddFriendSubscription: Subscription = new Subscription
   showNotificationsSubscription: Subscription = new Subscription
+  controlSocketSubscription: Subscription = new Subscription
 
   // Data
   loginProcess: boolean = false
@@ -29,18 +37,45 @@ export class MainComponent implements OnInit, OnDestroy {
   showAddFriend: boolean = false
   showNotifications: boolean = false
 
-  constructor(private AuthService: AuthService,private DomUiSerivce:DomUiService, private router:ActivatedRoute) { }
+  constructor(private AuthService: AuthService,
+              private DomUiSerivce:DomUiService,
+              private ControlSocketService:ControlSocketService,
+              private UserDataService:UserDataService) {}
+             
 
   ngOnInit(): void {
 
-    this.loginProcessSubscription = this.AuthService.inLoginProcess().subscribe(value => {
-      this.loginProcess = value
-    })
-
+    this.loginProcessSubscription = this.AuthService.inLoginProcess().subscribe(value => this.loginProcess = value)
     this.showOnEntranceSubscription = this.AuthService.getShowOnEntrance().subscribe(value => this.showOnEntrance = value)
     this.showAddFriendSubscription = this.DomUiSerivce.getShowAddFriend().subscribe(value => this.showAddFriend = value)
     this.showNotificationsSubscription = this.DomUiSerivce.getShowNotifications().subscribe(value => this.showNotifications = value)
-    this.showNotificationsSubscription = this.DomUiSerivce.getShowNotifications().subscribe(value => this.showNotifications = value)
+
+    this.controlSocketSubscription = this.ControlSocketService.getSocket().subscribe(socket => {
+
+    socket.on('friendrequest', ((notification: notifications) => {
+      this.UserDataService.AddNewNotification(notification,'friend_request')
+      this.DomUiSerivce.setHasNewNotifications(true)
+      playNotification()
+    }))
+
+    socket.on('acceptfriend', ((data: any) => {
+      this.UserDataService.addNewContact(data)
+    }))
+
+    socket.on('message', ((msg: chatContent) => {
+
+      let chatid!: string;
+
+      this.UserDataService.getChatsSnapshot().forEach((chat) => {
+        if(chat.owners.includes(msg.author))
+          chatid = chat.id
+      })
+
+      this.UserDataService.updateChatList(chatid,msg)
+      playMessage()
+    }))
+
+    })
 
   }
 
@@ -49,6 +84,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.showOnEntranceSubscription.unsubscribe()
     this.showAddFriendSubscription.unsubscribe()
     this.showNotificationsSubscription.unsubscribe()
+    this.controlSocketSubscription.unsubscribe()
   }
 
 }

@@ -30,11 +30,13 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   chatContentSubscription: Subscription = new Subscription;
   chatNameSubscription: Subscription = new Subscription
   chatImageSubscription: Subscription = new Subscription
+  chatContactIdSubscription: Subscription = new Subscription
   socketSubscription = new Subscription
 
   // Data //
   contactImage:string = ''
   name: string = ''
+  contactId: string = ''
   lastSeen: string = '99:99'
 
   chatId!: string | boolean;
@@ -53,8 +55,10 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.chatContentSubscription = this.ChatService.getChatContent().subscribe(val => this.messagesList = val)
     this.chatNameSubscription = this.ChatService.getChatDetails().name.subscribe(val => this.name = val)
     this.chatImageSubscription = this.ChatService.getChatDetails().image.subscribe(val =>this.contactImage = val)
+    this.chatContactIdSubscription = this.ChatService.getChatDetails().contactId.subscribe(val => this.contactId = val)
 
     this.scrollToBottom()
+
     
     this.socketSubscription = this.ChatService.getSocket().subscribe((socket: any) => {
       socket.on('message', (msg: chatContent) => {
@@ -74,6 +78,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.chatContentSubscription.unsubscribe()
     this.chatNameSubscription.unsubscribe()
     this.chatImageSubscription.unsubscribe()
+    this.chatContactIdSubscription.unsubscribe()
 
     this.ChatService.getSocket().subscribe((socket) => {
       socket.disconnect()
@@ -83,10 +88,11 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   reviceMessageHandler(msg_content: chatContent) {
-    if(msg_content.author !== this.UserDataService.getUserId() && msg_content.value.length > 0) {
-      this.ChatService.AddMessage(msg_content)
-      this.UserDataService.updateChatList(this.chatId as string,msg_content)
-      playMessage()
+    if(msg_content.author !== this.UserDataService.getUserIdSnapshot() && msg_content.value.length > 0) {
+      if(msg_content.chatid === this.chatId){
+        this.ChatService.AddMessage(msg_content)
+      }
+      this.UserDataService.updateChatList(msg_content.chatid as string,msg_content)
     }
   }
 
@@ -96,7 +102,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     const new_msg: chatContent = {
       authorname: this.UserDataService.getUserFullname(),
-      author: this.UserDataService.getUserId(),
+      author: this.UserDataService.getUserIdSnapshot(),
       id: (Math.random()*1000).toFixed(0),
       read: false,
       value: msg_content,
@@ -112,6 +118,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.ChatService.AddMessage(new_msg)
     this.UserDataService.updateChatList(this.chatId as string,new_msg)
     this.ChatService.emit('message', new_msg)
+    this.ChatService.emitToControlSocket(this.contactId,{...new_msg, chatid: this.contactId})
     this.message = ''
   }
 

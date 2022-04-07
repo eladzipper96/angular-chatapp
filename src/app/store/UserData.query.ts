@@ -21,6 +21,7 @@ export class UserDataQuery extends Query<UserDataState> {
     notifications$: Observable<notifications[]> = this.select('notifications')
 
     id$: Observable<string> = this.select('id')
+    username$: Observable<string> = this.select('username')
     updatedAt$: Observable<string> = this.select('updatedAt')
     email$: Observable<string> = this.select('email')
     birthday$: Observable<string> = this.select('birthday')
@@ -58,13 +59,15 @@ export class UserDataQuery extends Query<UserDataState> {
       }
   }
 
-  getPersonalDataRaw() {
+  getPersonalDataSnapshot() {
     const data = this.getValue()
     return {
+        id: data.id,
         name: data.name,
+        username: data.username,
         last_name: data.last_name,
         email: data.email,
-        birthdata: data.birthday,
+        birthday: data.birthday,
         phone: data.phone,
         profile_picture: data.profile_picture,
         website: data.website,
@@ -73,19 +76,30 @@ export class UserDataQuery extends Query<UserDataState> {
         facebook: data.facebook,
         instagram: data.instagram,
         linkedin: data.linkedin,
-        twitter: data.twitter
+        twitter: data.twitter,
+        last_seen: new Date()
     }
   }
 
   getChatsSnapshot() {return this.getValue().chats}
+
   getActiveChatSnapshot() {return this.getValue().activechats}
+
   getContactsSnapshot() {return this.getValue().contacts}
+
   getIdSnapshot() {return this.getValue().id}
+
   getNameSnapshot() {return {
       name: this.getValue().name,
       last_name: this.getValue().last_name
   }}
+
   getProfileImageSnapshot() {return this.getValue().profile_picture}
+
+  getNotifications() {return this.notifications$}
   
+  getNotifcationsSnapshop() {return this.getValue().notifications}
+
+  getUsernameSnapshot() {return this.getValue().username}
 
 }

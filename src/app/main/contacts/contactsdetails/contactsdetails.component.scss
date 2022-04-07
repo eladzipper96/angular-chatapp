@@ -10,7 +10,7 @@
 }
 
 .top {
-  height: 250px; // temp
+
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -22,9 +22,10 @@
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 
-  & img {
+  &-image {
     border-radius: 50%;
     width: 150px;
+    height: 150px;
     background-color: white;
     padding: 1rem 1rem;
   }
@@ -33,6 +34,21 @@
     font-size: 2.3rem;
     font-weight: 500;
     color:white;
+  }
+
+  &-buttons {
+    position: absolute;
+    right: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    & img {
+      cursor: pointer;
+      padding: 1rem 1rem;
+      background-color: white;
+      border-radius: 50%;
+    }
+
   }
 }
 

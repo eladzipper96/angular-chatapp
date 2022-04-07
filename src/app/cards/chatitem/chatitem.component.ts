@@ -23,9 +23,8 @@ export class ChatitemComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.data)
 
-    this.userId = this.UserDataService.getUserId()
+    this.userId = this.UserDataService.getUserIdSnapshot()
     this.userImage = this.UserDataService.getProfilePicture()
     this.content = this.data.value
     this.name = this.data.authorname

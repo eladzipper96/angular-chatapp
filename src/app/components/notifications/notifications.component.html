@@ -1,3 +1,12 @@
 <app-opacityscreen [title]="'Notifications'" [onExit]="exitHandler">
+    <div class="container" *ngIf="(notifcations$ | async) as notifications">
+        <div *ngIf="notifications.length === 0">There are no notifcations, to edit</div>
+        <app-notification-card 
+        *ngFor="let item of notifications"
+        [data]="item" 
+        [onDelete]="deleteNotification"
+        [onAccept]="acceptFriendRequestHandler">
+        </app-notification-card>
 
+    </div>
 </app-opacityscreen>

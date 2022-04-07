@@ -5,7 +5,10 @@
     </div>
     <div class="icons">
         <img [src]="addfriend_icon" [alt]="'add_friend'" (click)='AddFriendHandler()'/>
-        <img [src]="notifcations_icon" [alt]="'notifcation'" (click)='NotificationsHandler()'/>
-        <img [src]="options_icon" [alt]="'options'"/>
+        <img [src]="notifcations_black_icon" [alt]="'notifcation'" (click)='NotificationsHandler()' *ngIf='hasNewNotification; else noNotifcation'/>
+        <ng-template #noNotifcation>
+            <img [src]="notifcations_icon" [alt]="'notifcation'" (click)='NotificationsHandler()' />
+        </ng-template>
+        
     </div>
 </div>
