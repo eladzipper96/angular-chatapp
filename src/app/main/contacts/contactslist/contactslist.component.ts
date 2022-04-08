@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserDataService } from 'src/app/store/UserData.service';
 
-import { Subscription } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ContactsService } from 'src/app/main/contacts/state/contacts.service';
 import { contact } from 'src/interfaces/contact.interface';
 
@@ -10,44 +10,26 @@ import { contact } from 'src/interfaces/contact.interface';
   templateUrl: './contactslist.component.html',
   styleUrls: ['./contactslist.component.scss']
 })
-export class ContactslistComponent implements OnInit, OnDestroy {
+export class ContactslistComponent implements OnInit {
 
   // Data //
-  fullContactList!: contact[];
-  contactList!: contact[];
-
-  // Subscription //
-  contactListSubscription: Subscription = new Subscription
+  contactList$!: Observable<contact[]>;
 
   constructor(private UserDataService: UserDataService, private ContactService:ContactsService) { }
 
   ngOnInit(): void {
-    this.contactListSubscription = this.UserDataService.getContactsList()
-    .subscribe(val => {
-      this.contactList = val
-      this.fullContactList = val
-    })
+    this.contactList$ = this.UserDataService.getContactsList()
   }
 
   selectContactHandler(contact: contact) {
     this.ContactService.setSelectedContact(contact)
   }
 
-  ngOnDestroy(): void {
-    this.contactListSubscription.unsubscribe()
-  }
-
   updateContactList(searchParam: string): void {
-    const new_list: contact[] = []
-    
-    this.fullContactList.forEach((contact: contact) => {
-      let full_name = `${contact.name} ${contact.last_name}`.toLowerCase()
-      if(full_name.includes(searchParam.toLowerCase())) {
-        new_list.push(contact)
-      }
-    })
 
-    this.contactList = new_list
+    this.contactList$ = this.UserDataService.getContactsList().pipe(map((contacts) => {
+      return contacts.filter(contact => `${contact.name} ${contact.last_name}`.toLowerCase().includes(searchParam))
+    }))
 
   }
 

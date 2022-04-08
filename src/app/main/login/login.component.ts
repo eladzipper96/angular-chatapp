@@ -62,6 +62,26 @@ export class LoginComponent implements OnInit {
   
   }
 
+  RegisterSubmitHandler () {
+    this.HttpClient.post(`${environment.API_URL}/register`, {
+      username: this.registerForm.value.username,
+      password: this.registerForm.value.password,
+      email: this.registerForm.value.email,
+      name: this.registerForm.value.full_name
+    }).subscribe(res => {
+      const _res = res as {status: string}
+      if(_res.status === 'ok') {
+        alert('Username Created Successfully')
+        this.registerForm.value.username = ''
+        this.registerForm.value.password = ''
+        this.registerForm.value.email = ''
+        this.registerForm.value.name = ''
+      }
+      else {
+        alert('Username already taken!')
+      }
+    })
+  }
 
 
 }

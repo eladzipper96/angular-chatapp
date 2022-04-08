@@ -15,7 +15,7 @@ export interface chatContent {
     id: string,
     read: boolean,
     value: string,
-    date: chatDate,
+    year: chatDate,
     time: string,
     chatid: string,
 }

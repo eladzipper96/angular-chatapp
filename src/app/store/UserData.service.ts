@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import {io} from 'socket.io-client'
 
 import { UserDataStore } from './UserData.store';
@@ -53,8 +53,8 @@ export class UserDataService {
         return `${fullName.name} ${fullName.last_name}`
     }
 
-    getProfilePicture(): string {
-        return this.userDataQuery.getProfileImageSnapshot()
+    getProfilePicture(): Observable<string> {
+        return this.userDataQuery.profile_picture$
     }
 
     getNotifications() {
@@ -66,24 +66,25 @@ export class UserDataService {
     }
 
     getChatList() {
-        const chats = this.userDataQuery.getChatsSnapshot()
+
         const contacts = this.userDataQuery.getContactsSnapshot()
 
-        // const filtered_chats = chats.filter((chat) => activechats.includes(chat.id))
-        const aggerated_chats = chats.map((chat) => {
-            let newchat: any = {...chat}
+        return this.userDataQuery.chats$.pipe((map((chats => {
+            return chats.map((chat) => {
+                let temp_chat = {...chat}
 
-            contacts.forEach((contact) => {
-                if(chat.owners.includes(contact.id)) {
-                    newchat.name = `${contact.name} ${contact.last_name}`
-                    newchat.profile_picture = contact.profile_picture
-                    newchat.contactId = contact.id
-                }
+                contacts.forEach((contact) => {
+                    if(chat.owners.includes(contact.id)) {
+                        temp_chat.name = `${contact.name} ${contact.last_name}`
+                        temp_chat.profile_picture = contact.profile_picture
+                        temp_chat.contactId = contact.id
+                    }
+                })
+
+                return temp_chat
             })
+        }))))
 
-            return newchat
-        })
-        return aggerated_chats
     }
 
     getUsername() {
@@ -97,7 +98,7 @@ export class UserDataService {
         this.UserDataStore.update(state => ({
             ...state,
             activechats: data.activechats,
-            chats: sortByUpdateAt(data.chats),
+            chats: data.chats,
             contacts: sortContactsByName(data.contacts),
             blocked: data.blocked,
             notifications: data.notifications,
@@ -268,7 +269,6 @@ export class UserDataService {
                 id: userData.id,
                 profile_picture: userData.profile_picture,
                 last_seen: userData.last_seen
-
             })
 
             socket.disconnect()
@@ -283,22 +283,30 @@ export class UserDataService {
 
     updateChatList(chatid: string,msg :chatContent): void {
 
-        let chats = this.userDataQuery.getChatsSnapshot()
+        let newchats: chat[];
 
-        chats.map((chat) => {
-            if(chat.id === chatid) {
-                chat.content.push(msg)
-            }
-        })
+        this.getChatList().subscribe(chats => {
+            newchats = chats.map((chat) => {
+                if(chat.id === chatid) {
+                    chat.content.push(msg),
+                    chat.updatedAt = new Date().toISOString();
+                }
+                return chat
+            })
+        }).unsubscribe()
+
+        // chats.map((chat) => {
+        //     if(chat.id === chatid) {
+        //         chat.content.push(msg),
+        //         chat.updatedAt = new Date().toISOString();
+        //     }
+        // })
 
         this.UserDataStore.update(state => ({
             ...state,
-            chats
+            chats: sortByUpdateAt(newchats)
         }))
 
     }
-
-
-
 
 }

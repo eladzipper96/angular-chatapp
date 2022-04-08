@@ -1,12 +1,12 @@
 <div class="container">
     <app-action-bar (searchEvent)="updateChatList($event)"></app-action-bar>
-    <div class="list">
+    <div class="list" *ngIf="(chatList$ | async) as chatList">
         <app-list-item 
         *ngFor="let chat of chatList"
         [image]="chat.profile_picture"
         [name]="chat.name"
         [content]="chat.content.length > 0 ? chat.content[chat.content.length-1].authorname+': '+chat.content[chat.content.length-1].value : 'Be The first to chat!'"
-        [time]="chat.content.length > 0 ? chat.content[chat.content.length-1].time : ''"
+        [time]="chat.content.length > 0 ? chatTimeHandler(chat.updatedAt,chat.content[chat.content.length-1].time): ''"
         (click)="onClickHandler(chat)"
         ></app-list-item>
     </div>

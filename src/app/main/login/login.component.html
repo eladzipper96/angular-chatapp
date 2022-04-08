@@ -20,7 +20,7 @@
         </div>
         <div class="forms-item">
             <div class="forms-title">Register</div>
-            <form class="forms-form" [formGroup]="registerForm">
+            <form class="forms-form" [formGroup]="registerForm" (ngSubmit)="RegisterSubmitHandler()">
                 <div class="forms-form-input">
                     <label>Username</label>
                     <input formControlName='username'>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { UserDataService } from 'src/app/store/UserData.service';
 
 @Component({
@@ -9,23 +10,22 @@ import { UserDataService } from 'src/app/store/UserData.service';
 export class ChatitemComponent implements OnInit {
 
   @Input() data: any;
-  @Input() contactImage!: string;
+  @Input() contactImage!: string | null;
 
-  userId!: string;
-  userImage!: string
-
-  content: string = 'moshe the king is the best!'
-  name: string = 'Israel Israeli'
-  time: string = '12:22'
-  authorId: string = ''
+  userId$!: Observable<string>;
+  userImage$!: Observable<string>
+  
+  content!: string;
+  name!: string;
+  time!: string;
+  authorId!: string
 
   constructor(private UserDataService:UserDataService) { }
 
   ngOnInit(): void {
 
-
-    this.userId = this.UserDataService.getUserIdSnapshot()
-    this.userImage = this.UserDataService.getProfilePicture()
+    this.userId$ = this.UserDataService.getUserId()
+    this.userImage$ = this.UserDataService.getProfilePicture()
     this.content = this.data.value
     this.name = this.data.authorname
     this.time = this.data.time

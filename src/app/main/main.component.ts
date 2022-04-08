@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
 import { ControlSocketService } from '../services/control-socket.service';
@@ -25,17 +25,13 @@ export class MainComponent implements OnInit, OnDestroy {
   kid_image = '../../assets/images/kid_in_beach.png'
 
   // Subscriptions
-  loginProcessSubscription: Subscription =  new Subscription
-  showOnEntranceSubscription: Subscription =  new Subscription
-  showAddFriendSubscription: Subscription = new Subscription
-  showNotificationsSubscription: Subscription = new Subscription
   controlSocketSubscription: Subscription = new Subscription
 
   // Data
-  loginProcess: boolean = false
-  showOnEntrance: boolean = true
-  showAddFriend: boolean = false
-  showNotifications: boolean = false
+  loginProcess$!: Observable<boolean>
+  showOnEntrance$!: Observable<boolean>
+  showAddFriend$!: Observable<boolean>
+  showNotifications$!: Observable<boolean>
 
   constructor(private AuthService: AuthService,
               private DomUiSerivce:DomUiService,
@@ -45,10 +41,10 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.loginProcessSubscription = this.AuthService.inLoginProcess().subscribe(value => this.loginProcess = value)
-    this.showOnEntranceSubscription = this.AuthService.getShowOnEntrance().subscribe(value => this.showOnEntrance = value)
-    this.showAddFriendSubscription = this.DomUiSerivce.getShowAddFriend().subscribe(value => this.showAddFriend = value)
-    this.showNotificationsSubscription = this.DomUiSerivce.getShowNotifications().subscribe(value => this.showNotifications = value)
+    this.loginProcess$ = this.AuthService.inLoginProcess()
+    this.showOnEntrance$ = this.AuthService.getShowOnEntrance()
+    this.showAddFriend$ = this.DomUiSerivce.getShowAddFriend()
+    this.showNotifications$ = this.DomUiSerivce.getShowNotifications()
 
     this.controlSocketSubscription = this.ControlSocketService.getSocket().subscribe(socket => {
 
@@ -80,10 +76,6 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.loginProcessSubscription.unsubscribe()
-    this.showOnEntranceSubscription.unsubscribe()
-    this.showAddFriendSubscription.unsubscribe()
-    this.showNotificationsSubscription.unsubscribe()
     this.controlSocketSubscription.unsubscribe()
   }
 

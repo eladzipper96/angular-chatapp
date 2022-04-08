@@ -1,12 +1,12 @@
 <ng-content></ng-content>
-<div class="container" *ngIf="userId !== authorId; else authormessage">
+<div class="container contact" *ngIf="(userId$ | async) !== authorId; else authormessage">
     <img class="image image-right" [src]="contactImage" alt="'contact'"/>
     <div class="content content-left">{{content}}</div>
-    <div class="under-content">{{name}} {{time}} contact</div>
+    <div class="under-content under-contact">{{name}} {{time}}</div>
 </div>
 <ng-template #authormessage>
     <div class="container">
-        <img class="image image-left" [src]="userImage" alt="'user'"/>
+        <img class="image image-left" [src]="userImage$ | async" alt="'user'"/>
         <div class="content content-right">{{content}}</div>
         <div class="under-content">{{name}} {{time}}</div>
     </div>

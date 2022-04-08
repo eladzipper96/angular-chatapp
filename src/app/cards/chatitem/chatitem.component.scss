@@ -7,6 +7,11 @@
   width: max-content;
 }
 
+.contact {
+  margin-left: auto;
+  margin-right: 3rem;
+}
+
 .content {
   display: flex;
 
@@ -22,7 +27,6 @@
 
   &-left {
     background-color: $light-gray;
-
 
   }
 
@@ -55,6 +59,10 @@
   position: absolute;
   font-size: 1.4rem;
   bottom: -2.25rem;
-  right: 4rem;
+  right: 11rem;
   color: $bold-gray;
+}
+
+.under-contact {
+  right: 4rem !important;
 }

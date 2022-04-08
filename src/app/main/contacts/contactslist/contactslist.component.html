@@ -1,6 +1,6 @@
 <div class="container">
     <app-action-bar (searchEvent)="updateContactList($event)"></app-action-bar>
-    <div class="list">
+    <div class="list" *ngIf="(contactList$ | async) as contactList">
         <app-list-item
         *ngFor="let contact of contactList; let i = index"
         [image]="contact.profile_picture"

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { ChatService } from 'src/app/main/chatroom/store/chat.service';
 import { UserDataService } from 'src/app/store/UserData.service';
 
 import {chat} from '../../../../interfaces/chat.interface'
+import { sortByUpdateAt } from 'src/helper_functions/chats';
 
 @Component({
   selector: 'app-chatlist',
@@ -11,15 +13,15 @@ import {chat} from '../../../../interfaces/chat.interface'
 })
 export class ChatlistComponent implements OnInit {
 
-  chatList!: chat[];
+  chatList$!: Observable<chat[]>;
+  TODAY: Date = new Date();
 
   constructor(private UserDataService: UserDataService, private ChatService:ChatService) { }
 
   ngOnInit(): void {
-    this.chatList = this.UserDataService.getChatList()
+    this.chatList$ = this.UserDataService.getChatList().pipe(map((chats) => sortByUpdateAt(chats)))
   }
   
-
   onClickHandler(chat: chat) {
     this.ChatService.setActiveChatId(chat.id)
     this.ChatService.setChatContent(chat.content)
@@ -27,17 +29,25 @@ export class ChatlistComponent implements OnInit {
   }
 
   updateChatList(searchParam: string): void {
-    const completeList = this.UserDataService.getChatList()
-    let new_list: chat[] = []
+    this.chatList$ =  this.UserDataService.getChatList().pipe(map((chats => {
+      return chats.filter(chat => chat.name.includes(searchParam))
+    })))
+  }
 
-    completeList.forEach((chat) => {
-      if(chat.name.toLowerCase().includes(searchParam.toLowerCase())) {
-        new_list.push(chat)
+  chatTimeHandler(updatedAt: string, last_msg_time: string): string {
+
+    const _updatedAt = new Date(updatedAt)
+
+    if(
+      _updatedAt.getFullYear() === this.TODAY.getFullYear() &&
+      _updatedAt.getMonth() === this.TODAY.getMonth() &&
+      _updatedAt.getDate() === this.TODAY.getDate()) {
+        return last_msg_time
       }
-    })
 
-    this.chatList = new_list;
-
+    else {
+      return `${_updatedAt.getDate()}.${_updatedAt.getMonth()+1}.${_updatedAt.getFullYear()}`
+    }
   }
 
 }

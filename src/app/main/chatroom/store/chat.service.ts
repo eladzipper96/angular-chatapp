@@ -16,7 +16,7 @@ export class ChatService {
     socket$: BehaviorSubject<any> = new BehaviorSubject<any>(io(`${environment.API_URL}`, {query: {'chatid': '0'}}))
 
     emit(eventName: string, data: any) {
-        this.socket$.getValue().emit(eventName,{...data, year:'2022'})
+        this.socket$.getValue().emit(eventName,data)
     }
 
     getSocket() {
