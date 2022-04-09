@@ -72,10 +72,7 @@ export class LoginComponent implements OnInit {
       const _res = res as {status: string}
       if(_res.status === 'ok') {
         alert('Username Created Successfully')
-        this.registerForm.value.username = ''
-        this.registerForm.value.password = ''
-        this.registerForm.value.email = ''
-        this.registerForm.value.name = ''
+        this.registerForm.reset()
       }
       else {
         alert('Username already taken!')

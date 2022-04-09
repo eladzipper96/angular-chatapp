@@ -46,7 +46,7 @@
             <div></div> <!--This Div is for Grid purposes-->
             <span class="form-container-form-feedback">{{AccountFormFeedBack}}</span>
             <div class="form-container-form-buttons">
-                <div>Reset</div>
+                <div (click)="resetAccountForm()">Reset</div>
                 <button class="form-container-form-submit" type="submit">Submit</button>
             </div>
         </form>
@@ -77,7 +77,7 @@
             </div>
             <span class="form-container-form-feedback">{{SocialFormFeedBack}}</span>
             <div class="form-container-form-buttons">
-                <div>Reset</div>
+                <div (click)="resetSocialForm()">Reset</div>
                 <button class="form-container-form-submit" type="submit">Submit</button>
             </div>
         </form>
@@ -105,7 +105,7 @@
             </div>
             <span class="form-container-form-feedback">{{PasswordFormFeedBack}}</span>
             <div class="form-container-form-buttons">
-                <div>Reset</div>
+                <div (click)="passwordForm.reset()">Reset</div>
                 <button class="form-container-form-submit" type="submit">Submit</button>
             </div>
         </form>

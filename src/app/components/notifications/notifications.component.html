@@ -1,6 +1,9 @@
 <app-opacityscreen [title]="'Notifications'" [onExit]="exitHandler">
     <div class="container" *ngIf="(notifcations$ | async) as notifications">
-        <div *ngIf="notifications.length === 0">There are no notifcations, to edit</div>
+        <div class="no-notifications" *ngIf="notifications.length === 0">
+            <div>Unfortunitly There Are No New Notifications</div>
+            <img [src]='mailman'/>
+        </div>
         <app-notification-card 
         *ngFor="let item of notifications"
         [data]="item" 

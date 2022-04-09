@@ -7,7 +7,6 @@ import { chatContent } from 'src/interfaces/chat.interface';
 import { contact } from 'src/interfaces/contact.interface';
 
 import { dateMinuteHandler } from 'src/helper_functions/dates';
-import { playMessage } from '../../../../helper_functions/sounds'
 
 @Component({
   selector: 'app-chat',
@@ -36,7 +35,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   messagesList$!: Observable<chatContent[]>;
 
   contactId: string = ''
-  lastSeen: string = '99:99'
+  lastSeen: string = '12:23'
   chatId!: string | boolean;
   contactsList!: contact[];
 

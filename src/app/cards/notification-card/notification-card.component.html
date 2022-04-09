@@ -8,7 +8,8 @@
             <img [src]='exit_icon' alt="'X'"/>
         </div>
         <div class="container-content-name">{{data.from_name}}</div>
-        <div class="container-content-desc">Wants to be friends with you</div>
+        <div class="container-content-desc" *ngIf="data.type === 'friend_request'">Wants to be friends with you</div>
+        <div class="container-content-desc" *ngIf="data.type !== 'friend_request'">Accepted Your Friend Request</div>
         <div class="container-content-buttons" *ngIf="data.type === 'friend_request'">
             <span class="container-content-accept" (click)="acceptRequestHandler()">Accept</span>
             <span class="container-content-decline" (click)="deleteHandler()">Decline</span>

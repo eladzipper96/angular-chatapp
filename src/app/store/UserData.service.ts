@@ -57,6 +57,10 @@ export class UserDataService {
         return this.userDataQuery.profile_picture$
     }
 
+    getProfilePictureSnapshot(): string {
+        return this.userDataQuery.getValue().profile_picture
+    }
+
     getNotifications() {
         return this.userDataQuery.getNotifications()
     }
@@ -177,7 +181,7 @@ export class UserDataService {
           }).subscribe(() => {
               
             let notifcations = this.userDataQuery.getNotifcationsSnapshop()
-            notifcations = notifcations.filter(item => item.type !== notification.type && item.from_id !== notification.from_id)
+            notifcations = notifcations.filter(item => item.from_id !== notification.from_id)
             
             this.UserDataStore.update(state => ({
                 ...state,
@@ -248,11 +252,11 @@ export class UserDataService {
             const _response = response as any
             let socket;
 
-            socket = io(`${environment.API_URL}`, {query: {'chatid': _response.id}})
+            socket = io(`${environment.API_URL}`, {query: {'chatid': notification.from_id}})
 
             socket.emit('acceptfriend', {
                 chatid: _response.chatid,
-                owners: _response.chatowners,
+                chatowners: [userId,notification.from_id],
                 name: userData.name,
                 username: userData.username,
                 last_name: userData.last_name,
@@ -271,7 +275,7 @@ export class UserDataService {
                 last_seen: userData.last_seen
             })
 
-            socket.disconnect()
+            socket.emit('disconnect')
 
             this.addNewContact(_response)
 
@@ -294,13 +298,6 @@ export class UserDataService {
                 return chat
             })
         }).unsubscribe()
-
-        // chats.map((chat) => {
-        //     if(chat.id === chatid) {
-        //         chat.content.push(msg),
-        //         chat.updatedAt = new Date().toISOString();
-        //     }
-        // })
 
         this.UserDataStore.update(state => ({
             ...state,

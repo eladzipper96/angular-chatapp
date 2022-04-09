@@ -114,5 +114,28 @@ export class ProfileupdateComponent implements OnInit {
 
   }
 
+  resetAccountForm(): void {
+    this.accountForm.setValue({
+      'name': this.data.name,
+      'last_name': this.data.last_name,
+      'email': this.data.email,
+      'birthdate': this.data.birthday,
+      'phone': this.data.phone,
+      'website': this.data.website,
+      'address': this.data.address,
+      'moto': this.data.moto,
+      'profile_picture': this.data.profile_picture
+    })
+  }
+
+  resetSocialForm(): void {
+    this.socialForm.setValue({
+      'facebook': this.data.facebook,
+      'twitter': this.data.twitter,
+      'instagram': this.data.instagram,
+      'linkedin': this.data.linkedin,
+    })
+  }
+
 
 }

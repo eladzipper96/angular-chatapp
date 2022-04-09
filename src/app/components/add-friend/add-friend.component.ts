@@ -39,7 +39,7 @@ export class AddFriendComponent implements OnInit {
       username: this.contact_username,
       sender_id: this.UserDataService.getUserIdSnapshot(),
       sender_name: this.UserDataService.getUserFullname(),
-      picture: this.UserDataService.getProfilePicture(),
+      picture: this.UserDataService.getProfilePictureSnapshot(),
       time: new Date()
     }
 
@@ -52,10 +52,11 @@ export class AddFriendComponent implements OnInit {
 
         if(response.status === 'true') {
           socket = this.ControlSocketService.createNewSocket(response.id)
-          socket.emit('friendrequest', body)
-          socket.emit('disconnect')
           this.contact_username = ''
           this.showSpinner = false
+          alert(`Send Friend Request to ${this.contact_username}`)
+          socket.emit('friendrequest', body)
+          socket.emit('disconnect')
         }
         else {
           alert('Username does not exist')

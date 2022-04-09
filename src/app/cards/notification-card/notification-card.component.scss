@@ -1,6 +1,7 @@
 @import '../../../assets/scss/variables.scss';
 
 .container {
+    height: 100%;
     width: 100%;
     min-height: 80px;
     border-style: solid;
@@ -25,13 +26,15 @@
 
     &-content {
         display: flex;
+        height: 100%;
         width: 100%;
         flex-direction: column;
         position: relative;
+        justify-content: center;
 
         &-exit {
             position: absolute;
-            top: 0;
+            top: 0.5rem;
             right: -0.5rem;
             cursor: pointer;
             & img {

@@ -10,6 +10,7 @@ import { notifications } from 'src/interfaces/notifications.interface';
 
 import { playNotification, playMessage } from 'src/helper_functions/sounds';
 import { chatContent } from 'src/interfaces/chat.interface';
+import { dateMinuteHandler } from 'src/helper_functions/dates';
 
 @Component({
   selector: 'app-main',
@@ -55,7 +56,18 @@ export class MainComponent implements OnInit, OnDestroy {
     }))
 
     socket.on('acceptfriend', ((data: any) => {
+
+      const now = new Date()
+      const dataToNotification = {
+        sender_id: data.id,
+        sender_name: `${data.name} ${data.last_name}`,
+        picture: data.profile_picture,
+        time: `${now.getHours()}:${dateMinuteHandler(now.getMinutes())}`
+      }
+
       this.UserDataService.addNewContact(data)
+      this.UserDataService.AddNewNotification(dataToNotification,'accept_friend')
+      this.DomUiSerivce.setHasNewNotifications(true)
     }))
 
     socket.on('message', ((msg: chatContent) => {

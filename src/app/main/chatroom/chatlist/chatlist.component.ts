@@ -30,7 +30,7 @@ export class ChatlistComponent implements OnInit {
 
   updateChatList(searchParam: string): void {
     this.chatList$ =  this.UserDataService.getChatList().pipe(map((chats => {
-      return chats.filter(chat => chat.name.includes(searchParam))
+      return chats.filter(chat => chat.name.toLowerCase().includes(searchParam.toLowerCase()))
     })))
   }
 

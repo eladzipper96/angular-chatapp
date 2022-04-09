@@ -16,9 +16,9 @@
     
         <div class="chat-content" #chatContent *ngIf="(messagesList$ | async) as messagesList">
             <app-chatitem *ngFor="let msg of messagesList; let i = index" [data]="msg" [contactImage]="contactImage$ | async">
-            <div class="chat-content-date_separator" *ngIf="i === 0; else nofirst">{{msg.year.day+"."+msg.year.month+"."+msg.year.year}}</div>
+            <div class="chat-content-date_separator" *ngIf="i === 0; else nofirst">{{msg.year.day+"."+(msg.year.month+1)+"."+msg.year.year}}</div>
             <ng-template #nofirst>
-                <div class="chat-content-date_separator" *ngIf="messagesList[i].year.day > messagesList[i-1].year.day">{{msg.year.day+"."+msg.year.month+"."+msg.year.year}}</div>
+                <div class="chat-content-date_separator" *ngIf="messagesList[i].year.day > messagesList[i-1].year.day">{{msg.year.day+"."+(msg.year.month+1)+"."+msg.year.year}}</div>
             </ng-template>
             </app-chatitem>
         </div>
