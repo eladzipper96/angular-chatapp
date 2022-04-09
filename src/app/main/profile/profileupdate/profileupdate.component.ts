@@ -28,7 +28,7 @@ export class ProfileupdateComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.data = this.UserDataService.getPersonalDataSnapshop()
+    this.data = this.UserDataService.getPersonalDataSnapshot()
 
     this.accountForm = new FormGroup({
       'name': new FormControl(this.data.name),

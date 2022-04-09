@@ -28,7 +28,7 @@ export class UserDataService {
         return this.userDataQuery.getPersonalDataObservables()
     }
 
-    getPersonalDataSnapshop() {
+    getPersonalDataSnapshot() {
         return this.userDataQuery.getPersonalDataSnapshot()
     }
 
@@ -37,7 +37,7 @@ export class UserDataService {
     }
 
     getContactsListSnapshot(): contact[] {
-        return this.userDataQuery.getContactsSnapshot()
+        return this.userDataQuery.getValue().contacts
     }
 
     getUserId(): Observable<string> {
@@ -45,7 +45,7 @@ export class UserDataService {
     }
 
     getUserIdSnapshot(): string {
-        return this.userDataQuery.getIdSnapshot()
+        return this.userDataQuery.getValue().id
     }
 
     getUserFullname(): string {
@@ -62,16 +62,16 @@ export class UserDataService {
     }
 
     getNotifications() {
-        return this.userDataQuery.getNotifications()
+        return this.userDataQuery.notifications$
     }
 
     getChatsSnapshot() {
-        return this.userDataQuery.getChatsSnapshot()
+        return this.userDataQuery.getValue().chats
     }
 
     getChatList() {
 
-        const contacts = this.userDataQuery.getContactsSnapshot()
+        const contacts = this.getContactsListSnapshot()
 
         return this.userDataQuery.chats$.pipe((map((chats => {
             return chats.map((chat) => {
@@ -92,7 +92,7 @@ export class UserDataService {
     }
 
     getUsername() {
-        return this.userDataQuery.getUsernameSnapshot()
+        return this.userDataQuery.getValue().username
     }
     
     SetAllUserData(userdata: user[]) {
@@ -155,7 +155,7 @@ export class UserDataService {
 
     AddNewNotification(item: any,type: string) {
 
-        const notifcations = this.userDataQuery.getNotifcationsSnapshop()
+        const notifcations = this.userDataQuery.getValue().notifications
 
         const newNotification: notifications = {
             type: type,
@@ -176,11 +176,11 @@ export class UserDataService {
 
         this.HttpClient.post(`${environment.API_URL}/notification`, {
             type: 'remove',
-            id: this.userDataQuery.getIdSnapshot(),
+            id: this.userDataQuery.getValue().id,
             from_id: notification.from_id
           }).subscribe(() => {
               
-            let notifcations = this.userDataQuery.getNotifcationsSnapshop()
+            let notifcations = this.userDataQuery.getValue().notifications
             notifcations = notifcations.filter(item => item.from_id !== notification.from_id)
             
             this.UserDataStore.update(state => ({
@@ -241,8 +241,8 @@ export class UserDataService {
 
     acceptFriendRequest(notification: notifications) {
 
-        const userId = this.userDataQuery.getIdSnapshot()
-        const userData = this.userDataQuery.getPersonalDataSnapshot()
+        const userId = this.getUserIdSnapshot()
+        const userData = this.getPersonalDataSnapshot()
 
         this.HttpClient.post(`${environment.API_URL}/create_newchat`, {
             owners:[userId,notification.from_id],

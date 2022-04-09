@@ -38,14 +38,11 @@ export class ContactsdetailsComponent implements OnInit {
   showContact: boolean = false
   contactData!: contact;
 
-  constructor(private ContactService: ContactsService,
-     private ContactsQuery:ContactsQuery,
-     private UserDataService:UserDataService,
-     private Router:Router) { }
+  constructor(private ContactService: ContactsService,private UserDataService:UserDataService) { }
 
   ngOnInit(): void {
 
-    this.selectedContactSubscription = this.ContactsQuery.selectContact$.subscribe(isContact => {
+    this.selectedContactSubscription = this.ContactService.getSelectedContact().subscribe(isContact => {
       if(isContact) {
         this.contactData = isContact as contact
       }

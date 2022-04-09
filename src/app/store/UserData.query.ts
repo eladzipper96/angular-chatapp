@@ -81,25 +81,11 @@ export class UserDataQuery extends Query<UserDataState> {
     }
   }
 
-  getChatsSnapshot() {return this.getValue().chats}
-
-  getActiveChatSnapshot() {return this.getValue().activechats}
-
-  getContactsSnapshot() {return this.getValue().contacts}
-
-  getIdSnapshot() {return this.getValue().id}
 
   getNameSnapshot() {return {
       name: this.getValue().name,
       last_name: this.getValue().last_name
   }}
 
-  getProfileImageSnapshot() {return this.getValue().profile_picture}
-
-  getNotifications() {return this.notifications$}
-  
-  getNotifcationsSnapshop() {return this.getValue().notifications}
-
-  getUsernameSnapshot() {return this.getValue().username}
 
 }

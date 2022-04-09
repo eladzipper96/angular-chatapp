@@ -68,7 +68,7 @@ export class ChatService {
 
     AddMessage(newMessage: chatContent) {
 
-        const currentContent = this.ChatQuery.getChatContent()
+        const currentContent = this.ChatQuery.getValue().chatContent
 
         this.ChatStore.update(state => ({
             ...state,
@@ -77,12 +77,10 @@ export class ChatService {
     }
 
     emitToControlSocket(contactid: string,msg: any) {
-        console.log('emitting to '+contactid)
         const socket = io(`${environment.API_URL}`, {query: {'chatid': contactid}});
         socket.emit('message', msg)
-        // socket.disconnect()
+        socket.emit('disconnect')
     }
-
 
 
 }

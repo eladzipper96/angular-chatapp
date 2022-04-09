@@ -19,10 +19,6 @@ export class ChatQuery extends Query<ChatState> {
     super(store);
   }
 
-  getChatContent() {
-      return this.getValue().chatContent
-  }
-
   getChatDetails() {
     return {
       name: this.chatName$,
