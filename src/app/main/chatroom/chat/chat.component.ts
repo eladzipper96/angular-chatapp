@@ -45,7 +45,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
 
   ngOnInit(): void {
-
     this.contactImage$ = this.ChatService.getChatDetails().image
     this.chatName$ = this.ChatService.getChatDetails().name
     this.messagesList$ = this.ChatService.getChatContent()
@@ -63,6 +62,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   ngAfterViewChecked(): void {
+    this.message = ''
     this.scrollToBottom()
   }
 
@@ -104,12 +104,12 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
       time: `${now.getHours()}:${dateMinuteHandler(now.getMinutes())}`,
       chatid: this.chatId as string
     }
-
+    this.message = ''
     this.ChatService.AddMessage(new_msg)
     this.UserDataService.updateChatList(this.chatId as string,new_msg)
     this.ChatService.emit('message', new_msg)
     this.ChatService.emitToControlSocket(this.contactId,{...new_msg, chatid: this.contactId})
-    this.message = ''
+
   }
 
   scrollToBottom(): void {

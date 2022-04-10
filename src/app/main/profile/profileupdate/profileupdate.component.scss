@@ -89,3 +89,22 @@
     }
   }
 }
+
+@media screen and (max-width: 1050px) {
+  .form-container {
+    &-form {
+      grid-template-columns: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: $mobile-width) {
+  .container {
+    height: calc(100vh - 80px);
+    overflow-x: hidden;
+    transform: translateX(0);
+    padding-right: unset;
+    gap: 2rem;
+    margin-left: 1rem;
+  }
+}

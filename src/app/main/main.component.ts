@@ -34,6 +34,8 @@ export class MainComponent implements OnInit, OnDestroy {
   showAddFriend$!: Observable<boolean>
   showNotifications$!: Observable<boolean>
 
+  isMobile: boolean = false;
+
   constructor(private AuthService: AuthService,
               private DomUiSerivce:DomUiService,
               private ControlSocketService:ControlSocketService,
@@ -41,6 +43,10 @@ export class MainComponent implements OnInit, OnDestroy {
              
 
   ngOnInit(): void {
+
+    if (window.screen.width <= 600) { // 768px portrait
+      this.isMobile = true;
+    }
 
     this.loginProcess$ = this.AuthService.inLoginProcess()
     this.showOnEntrance$ = this.AuthService.getShowOnEntrance()

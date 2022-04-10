@@ -5,7 +5,7 @@
     <div class="container">
         <app-sidebar></app-sidebar>
         <div>
-            <div class="ph-container" *ngIf="(showOnEntrance$ | async); else content">
+            <div class="ph-container" *ngIf="(showOnEntrance$ | async) && !isMobile; else content">
                 <span class="ph-header">Welcome!</span>
                 <span class="ph-title">Skye Chat</span>
                 <img class="ph-sun" [src]='sun_image'/>

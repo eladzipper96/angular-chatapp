@@ -23,7 +23,7 @@
             </app-chatitem>
         </div>
         <div class="chat-input">
-            <input [(ngModel)]='message'/>
+            <input [(ngModel)]='message' autofocus/>
             <div class="chat-input-submit" (click)="addMessageHandler(message)">
                 <img [src]="send" alt="'>'"/>
             </div>

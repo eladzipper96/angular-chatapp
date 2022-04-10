@@ -28,3 +28,17 @@
 .letter {
   font-size: 1.6rem;
 }
+
+@media screen and (max-width: $mobile-width) {
+
+  .container {
+    height: calc(100vh - 80px);
+  }
+
+  .list {
+    height: calc(100vh - 160px);
+    transform: unset;
+    margin-left: unset;
+  }
+  
+}

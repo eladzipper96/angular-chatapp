@@ -19,6 +19,7 @@ import { OpacityscreenComponent } from './cards/opacityscreen/opacityscreen.comp
 import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { NotificationCardComponent } from './cards/notification-card/notification-card.component';
+import { AutofocusDirective } from './directives/autofocus.directive';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NotificationCardComponent } from './cards/notification-card/notificatio
     OpacityscreenComponent,
     NotificationsComponent,
     NotificationCardComponent,
+    AutofocusDirective,
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@
   position: relative;
 }
 
+
 .logo {
   position: absolute;
   top: 2rem;
@@ -27,7 +28,6 @@
 }
 
 .navigator {
-  justify-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,5 +44,29 @@
         width: 35px;
       }
     }
+  }
+}
+
+@media screen and (max-width: $mobile-width) {
+  .container {
+    height: 80px;
+    flex-direction: unset;
+    position: unset;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .logo {
+    position: unset;
+    margin-left: 2rem;
+  }
+
+  .navigator {
+    margin-top: 1rem;
+    align-self: unset;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
   }
 }

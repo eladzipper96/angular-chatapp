@@ -43,3 +43,20 @@
   }
 }
 
+@media screen and (max-width: 800px) {
+  .search {
+    & input {
+      width: 150px;
+    }
+  }
+}
+
+@media screen and (max-width: $mobile-width) {
+
+  .search {
+    & input {
+      width: unset;
+    }
+  }
+
+}

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
+import { deleteAllCookies } from 'src/helper_functions/cookies';
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -35,10 +37,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   clickHandler(path: string) {
-
     if(this.showOnEntance) this.AuthService.setShowOnEntrance(false)
-
     this.router.navigate([path])
+  }
+
+  logoutHandler() {
+    deleteAllCookies()
+    this.AuthService.setIsLoggedIn(false)
+    this.router.navigate(['login'])
   }
 
 }
