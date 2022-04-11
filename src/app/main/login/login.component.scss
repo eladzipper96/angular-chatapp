@@ -84,3 +84,24 @@
 .spinner {
   margin-top: 2rem;
 }
+
+@media screen and (max-width: $mobile-width) {
+
+  .container {
+    height: max-content;
+  }
+
+  .forms {
+    flex-direction: column;
+    gap: 2rem;
+
+    &-item {
+      width: 95vw;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+  }
+}

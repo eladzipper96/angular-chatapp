@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { UserDataService } from 'src/app/store/UserData.service';
 
-import { userPersonalData } from 'src/interfaces/user.interface';
 
 @Component({
   selector: 'app-profiledetails',
   templateUrl: './profiledetails.component.html',
-  styleUrls: ['./profiledetails.component.scss']
+  styleUrls: ['./profiledetails.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfiledetailsComponent implements OnInit {
 

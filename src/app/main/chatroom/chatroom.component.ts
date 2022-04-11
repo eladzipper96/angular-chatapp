@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-chatroom',
   templateUrl: './chatroom.component.html',
-  styleUrls: ['./chatroom.component.scss']
+  styleUrls: ['./chatroom.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatroomComponent implements OnInit {
 

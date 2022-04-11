@@ -62,7 +62,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   ngAfterViewChecked(): void {
-    this.message = ''
     this.scrollToBottom()
   }
 
@@ -89,6 +88,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   addMessageHandler(msg_content: string) {
 
     const now = new Date()
+
+    console.log(msg_content)
 
     const new_msg: chatContent = {
       authorname: this.UserDataService.getUserFullname(),
